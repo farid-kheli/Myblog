@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://jakarta.ee/xml/ns/jakartaee" version="5.0">
+<filter>
+    <filter-name>JwtFilter</filter-name>
+    <filter-class>JWT.JwtFilter</filter-class>
+</filter>
+<filter-mapping>
+    <filter-name>JwtFilter</filter-name>
+    <url-pattern>/</url-pattern>
+    <url-pattern>/MyBloges</url-pattern>
+</filter-mapping>
+    <servlet>
+        <servlet-name>HelloServlet</servlet-name>
+        <servlet-class>servlet.login</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>HelloServlet</servlet-name>
+        <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>DisplayBlog</servlet-name>
+        <servlet-class>servlet.blog</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DisplayBlog</servlet-name>
+        <url-pattern>/Blog</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>lougout</servlet-name>
+        <servlet-class>servlet.logout</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>lougout</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>register</servlet-name>
+        <servlet-class>servlet.register</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>register</servlet-name>
+        <url-pattern>/register</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>index</servlet-name>
+        <servlet-class>servlet.index</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>index</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>dashbord</servlet-name>
+        <servlet-class>servlet.Dashbord</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>dashbord</servlet-name>
+        <url-pattern>/dashbord</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>saveBlog</servlet-name>
+        <servlet-class>servlet.Dashbord</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>saveBlog</servlet-name>
+        <url-pattern>/saveBlog</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>MyBloges</servlet-name>
+        <servlet-class>servlet.MyBloges</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MyBloges</servlet-name>
+        <url-pattern>/MyBloges</url-pattern>
+    </servlet-mapping>
+    
+    
+</web-app>
