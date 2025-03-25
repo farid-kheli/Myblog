@@ -7,6 +7,7 @@
     <title>My Blogs</title>
 </head>
 <body>
+<%@ include file="P_Nav.jsp"   %>
     <h1>My Blogs</h1>
 
     <c:choose>

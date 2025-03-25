@@ -1,7 +1,9 @@
 package JWT;
 
 import java.io.IOException;
+import java.util.Map;
 
+import beans.GetUserID;
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.FilterConfig;
@@ -19,22 +21,22 @@ public class JwtFilter implements Filter {
 
     	HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
-        String token = null;
         Cookie[] cookies = req.getCookies();
-        if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                if ("jwt_token".equals(cookie.getName())) {
-                    token = cookie.getValue();
-                    break;
-                }
-            }
-        }
-        System.out.println("FILTER");
-        Integer userId = (token != null) ? JwtUtil.validateToken(token) : null;
-        if (userId == null) {
+        Map<String, Integer> userT = GetUserID.GetId(cookies);
+        if (userT == null) {
             res.sendRedirect("login");
             return;
         }
+   	 	
+   	 Integer role = userT.get("role");
+   	String path = req.getRequestURI();
+
+   	if (path.startsWith("/admin") && (role!=1)) {
+   	 request.getRequestDispatcher("WEB-INF/403.jsp").forward(request, response);
+   	    return;
+   	}
+        System.out.println("FILTER:"+ path);
+        
         chain.doFilter(request, response);
     }
 

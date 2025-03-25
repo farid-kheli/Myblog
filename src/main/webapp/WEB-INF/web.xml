@@ -8,6 +8,8 @@
     <filter-name>JwtFilter</filter-name>
     <url-pattern>/</url-pattern>
     <url-pattern>/MyBloges</url-pattern>
+    <url-pattern>/profiel</url-pattern>
+    <url-pattern>/admin/*</url-pattern>
 </filter-mapping>
     <servlet>
         <servlet-name>HelloServlet</servlet-name>
@@ -34,6 +36,15 @@
         <url-pattern>/logout</url-pattern>
     </servlet-mapping>
     <servlet>
+        <servlet-name>profiel</servlet-name>
+        <servlet-class>servlet.profil</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>profiel</servlet-name>
+        <url-pattern>/profiel</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
         <servlet-name>register</servlet-name>
         <servlet-class>servlet.register</servlet-class>
     </servlet>
@@ -41,6 +52,61 @@
         <servlet-name>register</servlet-name>
         <url-pattern>/register</url-pattern>
     </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>displayusers</servlet-name>
+        <servlet-class>admin.display_users</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>displayusers</servlet-name>
+        <url-pattern>/admin/users</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>user_likes</servlet-name>
+        <servlet-class>servlet.like</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>user_likes</servlet-name>
+        <url-pattern>/like</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>user_saves</servlet-name>
+        <servlet-class>servlet.save</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>user_saves</servlet-name>
+        <url-pattern>/save</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>user_shares</servlet-name>
+        <servlet-class>servlet.share</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>user_shares</servlet-name>
+        <url-pattern>/share</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>user_comments</servlet-name>
+        <servlet-class>servlet.comment</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>user_comments</servlet-name>
+        <url-pattern>/comment</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>user_comments</servlet-name>
+        <servlet-class>servlet.comment</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>user_comments</servlet-name>
+        <url-pattern>/admin/</url-pattern>
+    </servlet-mapping>
+    
     <servlet>
         <servlet-name>index</servlet-name>
         <servlet-class>servlet.index</servlet-class>
@@ -49,7 +115,27 @@
         <servlet-name>index</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
+    
     <servlet>
+        <servlet-name>Manage_categorys</servlet-name>
+        <servlet-class>admin.category</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Manage_categorys</servlet-name>
+        <url-pattern>/admin/categorys</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>Manage_ADD_categorys</servlet-name>
+        <servlet-class>admin.Addcategory</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Manage_ADD_categorys</servlet-name>
+        <url-pattern>/admin/AddCategory</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+    
         <servlet-name>dashbord</servlet-name>
         <servlet-class>servlet.Dashbord</servlet-class>
     </servlet>
@@ -73,6 +159,4 @@
         <servlet-name>MyBloges</servlet-name>
         <url-pattern>/MyBloges</url-pattern>
     </servlet-mapping>
-    
-    
 </web-app>

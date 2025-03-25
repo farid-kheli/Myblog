@@ -15,6 +15,7 @@
 </script>
 </head>
 <body>
+<%@ include file="P_Nav.jsp"   %>
 <h1>Create a Blog Post</h1>
 
 <form action="saveBlog" method="post">

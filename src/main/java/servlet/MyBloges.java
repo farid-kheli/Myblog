@@ -14,10 +14,11 @@ import java.sql.ResultSet;
 import java.sql.DriverManager;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import JWT.JwtUtil;
 import beans.Blog;
-
+import beans.GetUserID;
     
 
 public class MyBloges extends HttpServlet {
@@ -37,23 +38,16 @@ public class MyBloges extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
     	
-    	String token = null;
-        Cookie[] cookies = request.getCookies();
-        if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                if ("jwt_token".equals(cookie.getName())) {
-                    token = cookie.getValue();
-                    break;
-                }
+        
+        try {
+        	Cookie[] cookies = request.getCookies();
+        	Map<String, Integer> user = GetUserID.GetId(cookies);
+            Integer userId=user.get("user_id");
+            if (userId == null) {
+            	response.sendRedirect("login");
+                return;
             }
-        }
-        Integer userId = (token != null) ? JwtUtil.validateToken(token) : null;
-        if (userId == null) {
-        	response.sendRedirect("login");
-            return;
-        }
-        System.out.println("MY_BLOGES");
-        try{
+            System.out.println("MY_BLOGES");
         	String URL = "jdbc:mysql://localhost:3306/WebApp";
             String USER = "root";
             String PASSWORD = "";

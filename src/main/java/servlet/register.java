@@ -5,10 +5,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.DriverManager;
 import org.mindrot.jbcrypt.BCrypt;
+import beans.User;
 public class register extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -26,21 +24,10 @@ public class register extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	String name = request.getParameter("name");
     	String email = request.getParameter("email");
-    	String password = request.getParameter("password");
-    	String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
-		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/WebApp","root","");
-			PreparedStatement pre = con.prepareStatement("insert into users(name,email,password) values(?,?,?);");
-			pre.setString(1, name);
-			pre.setString(2, email);
-			pre.setString(3, hashedPassword);
-			System.out.print(pre.execute());;
-			
-			}
-		catch(Exception e) {
-			e.printStackTrace();
-		}
+    	String hashedPassword = BCrypt.hashpw(request.getParameter("password"), BCrypt.gensalt());
+    	User user = new User(name,email,hashedPassword);
+    	user.creat();
+    	request.getRequestDispatcher("login").forward(request, response);
 	}
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub

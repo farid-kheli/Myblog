@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-hellooooooooooooo
+<%@ include file="A_Nav.jsp"   %>
+<h1>Welcome, Admin</h1>
 </body>
 </html>

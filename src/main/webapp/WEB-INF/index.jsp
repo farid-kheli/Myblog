@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,10 +8,20 @@
 <title>Insert title here</title>
 </head>
 <body>
-<ul>
-<li><a href="dashbord">profiel</a></li>
-<li><a href=MyBloges>My Bloges</a></li>
-<li><a href=logout>logout</a></li>
-</ul>
+<%@ include file="P_Nav.jsp"   %>
+<c:choose>
+        <c:when test="${not empty blogs}">
+            <c:forEach var="blog" items="${blogs}">
+                <div>
+                    <h2><a href="Blog?id=${blog.id}">${blog.title}</a></h2>
+                    <small>Published on: ${blog.createdAt}</small>
+                    <hr>
+                </div>
+            </c:forEach>
+        </c:when>
+        <c:otherwise>
+            <p>You haven't posted any blogs yet.</p>
+        </c:otherwise>
+    </c:choose>
 </body>
 </html>
