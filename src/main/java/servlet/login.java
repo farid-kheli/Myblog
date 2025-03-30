@@ -49,9 +49,10 @@ public class login extends HttpServlet {
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 String storedHashedPassword = rs.getString("password");
-                if (BCrypt.checkpw(password, storedHashedPassword)) {
+                if (!BCrypt.checkpw(password, storedHashedPassword)) {
                     request.setAttribute("message", "❌ Incorrect password!");
                 } else {
+                	System.out.println("helloooooooooooooooooooooooooooooo :"+ BCrypt.checkpw(password, storedHashedPassword));
                 	int userId = rs.getInt("id");
                 	String token = JwtUtil.generateToken(userId,rs.getInt("role"));
                 	Cookie jwtCookie = new Cookie("jwt_token", token);

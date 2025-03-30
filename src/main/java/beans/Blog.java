@@ -1,18 +1,18 @@
 package beans;
 
-import java.sql.Timestamp;
-
+import java.sql.Date;
+import beans.User;
 public class Blog {
     private int id;
     private String title;
     private String content;
     private int authorId;
-    private Timestamp createdAt;
+    private Date createdAt;
 
     // Constructors
     public Blog() {}
 
-    public Blog(int id, String title, String content, int authorId, Timestamp createdAt) {
+    public Blog(int id, String title, String content, int authorId, Date createdAt) {
         this.id = id;
         this.title = title;
         this.content = content;
@@ -20,7 +20,6 @@ public class Blog {
         this.createdAt = createdAt;
     }
 
-    // Getters and Setters
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
 
@@ -33,7 +32,14 @@ public class Blog {
     public int getAuthorId() { return authorId; }
     public void setAuthorId(int authorId) { this.authorId = authorId; }
 
-    public Timestamp getCreatedAt() { return createdAt; }
-    public void setCreatedAt(Timestamp createdAt) { this.createdAt = createdAt; }
+    public Date getCreatedAt() { return createdAt; }
+    public void setCreatedAt(Date createdAt) { this.createdAt = createdAt; }
+    public String getusername() throws Exception {
+			User user = User.GetUser(this.authorId);
+			
+			String name=user.getName();
+	    	return name;
+    }
+    
 }
 

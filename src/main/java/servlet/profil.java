@@ -5,6 +5,9 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.Part;
+
 import java.io.IOException;
 import java.util.Map;
 
@@ -15,8 +18,9 @@ public class profil extends HttpServlet {
        
    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 
-		System.out.println("PROFIEL");
+		System.out.println("PROFIEL :");
 		try {
         Cookie[] cookies = request.getCookies();
 			Map<String, Integer> userT = GetUserID.GetId(cookies);

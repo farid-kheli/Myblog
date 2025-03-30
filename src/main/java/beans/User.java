@@ -12,6 +12,7 @@ public class User {
     private String name;
     private String password;
     private String email;
+    private String img = null;
 
     public User() {}
 
@@ -20,6 +21,12 @@ public class User {
         this.email = email;
         this.password = password;
         
+    }
+    public User( String name, String email, String password,int id) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.id=id;
     }
     public void creat() {
     	try {
@@ -56,26 +63,29 @@ public class User {
     public int getId() { return id; }
     public String getEmail() { return email; }
     public String getName() { return name; }
+    public String getImg() { return img; }
     public static User GetUser(int id) throws Exception { 
         	Class.forName("com.mysql.cj.jdbc.Driver");
         	
     		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/WebApp","root","");
-    		PreparedStatement stm = con.prepareStatement("SELECT id,name,email,password FROM users WHERE id = ?");
+    		PreparedStatement stm = con.prepareStatement("SELECT id,name,email,password,img FROM users WHERE id = ?");
     		
 
     			stm.setInt(1, id);
     			User user = null;
     			ResultSet rs = stm.executeQuery();
     			if (rs.next()) {
+    				
     			user =new User(rs.getString("name"),rs.getString("email"),rs.getString("password"));
     			user.setId(id);
+    			user.setImg(rs.getString("img"));
     			stm.close();
     			
     			}
-
     			return user;
     }
     public void setId(int id) { this.id = id; }
+    public void setImg(String img) { this.img = img; }
 
 
 }

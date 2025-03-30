@@ -43,7 +43,7 @@ public class index extends HttpServlet {
                            rs.getString("title"),
                            rs.getString("content"),
                            rs.getInt("author_id"),
-                           rs.getTimestamp("created_at")
+                           rs.getDate("created_at")
                    ));
                }
                

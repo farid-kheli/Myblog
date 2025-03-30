@@ -36,7 +36,8 @@ public class display_users extends HttpServlet {
                    users.add(new User(
                            rs.getString("name"),
                            rs.getString("email"),
-                           rs.getString("password")
+                           rs.getString("password"),
+                           rs.getInt("id")
                    ));
                }
                System.out.print(users);
