@@ -40,6 +40,7 @@ public class uploadProfilePic extends HttpServlet {
         User user= User.GetUser(userId);
         	Part filePart = request.getPart("profilePic");
             String uploadPath =  "uploads"+ File.separator + "profile_pictures";
+            
              File uploadDir = new File(uploadPath);
             if (!uploadDir.exists()) uploadDir.mkdir();
             String filePath = "/home/farid/eclipse-workspace/exampleAPP/src/main/webapp/uploads/profile_pictures/"+ user.getName();

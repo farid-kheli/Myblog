@@ -27,8 +27,7 @@
 						<tr>
 							<th scope="row">${blog.id}</th>
 							<td>${blog.title}</td>
-							<td>Some quick example text to build on the
-								card title and make up the bulk of the card's content.</td>
+							<td>${blog.getDiscription()}</td>
 							<td>${blog.createdAt}</td>
 							<td>
 								<a href="Blog?id=${blog.id}" type="button" class="btn btn-primary">Check out</a>

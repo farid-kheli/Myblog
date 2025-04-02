@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,34 +20,42 @@
 </head>
 <body class="text-light bg-dark">
 	<%@ include file="P_Nav.jsp"%>
-	<form action="saveBlog" class="container-sm" method="post">
+	<form action="saveBlog" class="container-sm" method="post" enctype="multipart/form-data">
 		<h1>Create a Blog Post</h1>
 		<div class="d-flex gap-5">
 			<div class="form-floating w-50 text-black">
 				<input type="text" class="form-control" id="floatingInput"
-					placeholder="name@example.com"> <label for="floatingInput">Titel</label>
+					name="title"> <label for="floatingInput">Titel</label>
 			</div>
-			<select class="form-select w-50" aria-label="Default select example">
+			<select class="form-select w-50" name="categry" aria-label="Default select example">
 				<option selected>Open this select menu</option>
-				<option value="1">One</option>
-				<option value="2">Two</option>
-				<option value="3">Three</option>
+				<c:choose>
+					<c:when test="${not empty categrys}">
+						<c:forEach var="categry" items="${categrys}">
+							<option  value="${categry.getId()}"> ${categry.getCategory()}</option>
+						</c:forEach>
+					</c:when>
+					<c:otherwise>
+						<p>There is no Categorys yet.</p>
+					</c:otherwise>
+				</c:choose>
 			</select>
 		</div>
 		<div class="form-floating text-black mt-3 mb-3">
-			<input type="text" class="form-control" id="floatingInput"
-				placeholder="name@example.com"> <label for="floatingInput">discription</label>
+			<input type="text" name="discription" class="form-control" 
+				> <label >discription</label>
 		</div>
 		<div class="input-group mb-3">
 			<label class="input-group-text" for="inputGroupFile01">Upload</label>
-			<input type="file" class="form-control" id="inputGroupFile01">
+			<input type="file" name="B_Img" class="form-control" id="inputGroupFile01">
 		</div>
 		<div>
 			<h3>Content:</h3>
 			<textarea id="content" name="content"></textarea>
 			<br> <br>
 		</div>
-		<button type="button" class="btn btn-outline-primary">Save Blog</button>
+		<button type="submit" class="btn btn-outline-primary">Save
+			Blog</button>
 	</form>
 </body>
 </html>

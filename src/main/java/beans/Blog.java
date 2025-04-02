@@ -6,18 +6,20 @@ public class Blog {
     private int id;
     private String title;
     private String content;
+    private String Discription;
+    private int CID;
     private int authorId;
     private Date createdAt;
 
-    // Constructors
-    public Blog() {}
 
-    public Blog(int id, String title, String content, int authorId, Date createdAt) {
+    public Blog(int id, String title, String content, int authorId, Date createdAt,String Discription,int CID) {
         this.id = id;
+        this.CID = CID;
         this.title = title;
         this.content = content;
         this.authorId = authorId;
         this.createdAt = createdAt;
+        this.Discription = Discription;
     }
 
     public int getId() { return id; }
@@ -30,6 +32,8 @@ public class Blog {
     public void setContent(String content) { this.content = content; }
 
     public int getAuthorId() { return authorId; }
+    public int getCID() { return CID; }
+    public String getDiscription() { return Discription; }
     public void setAuthorId(int authorId) { this.authorId = authorId; }
 
     public Date getCreatedAt() { return createdAt; }

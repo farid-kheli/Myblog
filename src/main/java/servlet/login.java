@@ -44,7 +44,7 @@ public class login extends HttpServlet {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/WebApp", "root", "");
-            PreparedStatement stmt = con.prepareStatement("SELECT id,password,role FROM users WHERE email = ?");
+            PreparedStatement stmt = con.prepareStatement("SELECT * FROM users WHERE email = ?");
             stmt.setString(1, email);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {

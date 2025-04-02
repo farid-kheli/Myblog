@@ -36,7 +36,7 @@
 					data-bs-toggle="dropdown" aria-expanded="false">profiel</button>
 				<ul class="dropdown-menu">
 					<li><a class="dropdown-item" href=profiel>profiel</a></li>
-					<li><a class="dropdown-item" href=MyBloges>setting</a></li>
+					<li><a class="dropdown-item" href=setting>setting</a></li>
 					<li><a class="dropdown-item" href=logout>logout</a></li>
 				</ul>
 			</div>

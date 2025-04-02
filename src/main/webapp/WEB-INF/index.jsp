@@ -17,12 +17,11 @@
 			<c:when test="${not empty blogs}">
 				<c:forEach var="blog" items="${blogs}">
 					<div class="card" style="width: 18rem;">
-						<img src="..." class="card-img-top" alt="...">
+						<img src="/uploads/Blog_pictures/${blog.id }" class="card-img-top" alt="...">
 						<div class="card-body">
 
 							<h5 class="card-title">${blog.title}</h5>
-							<p class="card-text">Some quick example text to build on the
-								card title and make up the bulk of the card's content.</p>
+							<p class="card-text"> ${blog.getDiscription()} </p>
 							<a href="Blog?id=${blog.id}" class="btn btn-primary">check it out</a> 
 							<small>${blog.createdAt}</small>
 						</div>

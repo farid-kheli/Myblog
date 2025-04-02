@@ -64,7 +64,9 @@ public class MyBloges extends HttpServlet {
                            rs.getString("title"),
                            rs.getString("content"),
                            rs.getInt("author_id"),
-                           rs.getDate("created_at")
+                           rs.getDate("created_at"),
+                           rs.getString("discription"),
+                           rs.getInt("category_id")
                    ));
                }
                

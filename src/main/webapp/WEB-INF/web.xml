@@ -15,6 +15,7 @@
     <url-pattern>/profiel</url-pattern>
     <url-pattern>/admin</url-pattern>
 </filter-mapping>
+
     <servlet>
         <servlet-name>HelloServlet</servlet-name>
         <servlet-class>servlet.login</servlet-class>
@@ -57,7 +58,6 @@
         <url-pattern>/register</url-pattern>
     </servlet-mapping>
     
- 
     
     <servlet>
         <servlet-name>user_likes</servlet-name>
@@ -95,14 +95,40 @@
         <url-pattern>/comment</url-pattern>
     </servlet-mapping>
     
-    
-  <servlet>
+    <servlet>
         <servlet-name>index</servlet-name>
         <servlet-class>servlet.index</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>index</servlet-name>
         <url-pattern>/</url-pattern>
+    </servlet-mapping> 
+    
+    <servlet>
+        <servlet-name>ChangePassword</servlet-name>
+        <servlet-class>servlet.ChangePassword</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ChangePassword</servlet-name>
+        <url-pattern>/ChangePassword</url-pattern>
+    </servlet-mapping> 
+    
+    <servlet>
+        <servlet-name>ChangePassword</servlet-name>
+        <servlet-class>servlet.ChangePassword</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ChangePassword</servlet-name>
+        <url-pattern>/ChangePassword</url-pattern>
+    </servlet-mapping> 
+  
+  <servlet>
+        <servlet-name>deletePassword</servlet-name>
+        <servlet-class>servlet.deletePassword</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>deletePassword</servlet-name>
+        <url-pattern>/deletePassword</url-pattern>
     </servlet-mapping> 
     
        <servlet>
@@ -112,6 +138,33 @@
     <servlet-mapping>
         <servlet-name>displayusers</servlet-name>
         <url-pattern>/admin</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>DeleteBlog</servlet-name>
+        <servlet-class>admin.deleteblog</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DeleteBlog</servlet-name>
+        <url-pattern>/Delete/Blog</url-pattern>
+    </servlet-mapping>
+    
+    
+     <servlet>
+        <servlet-name>chengeusername</servlet-name>
+        <servlet-class>servlet.chengeusername</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>chengeusername</servlet-name>
+        <url-pattern>/chengeusername</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>setting</servlet-name>
+        <servlet-class>servlet.setting</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>setting</servlet-name>
+        <url-pattern>/setting</url-pattern>
     </servlet-mapping>
     
     <servlet>
