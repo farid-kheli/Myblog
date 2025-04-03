@@ -85,7 +85,6 @@ public class Dashbord extends HttpServlet {
 		                .lines().collect(Collectors.joining("\n"));
 	        	String categry = new BufferedReader(new InputStreamReader(request.getPart("categry").getInputStream()))
 		                .lines().collect(Collectors.joining("\n"));
-	        	System.out.println("HELL000000000000000000000000000000000000000000 :"+categry+" "+discription+" "+title);
 	        	Cookie[] cookies = request.getCookies();
 	        	Map<String, Integer> userT = GetUserID.GetId(cookies);
 	        	 Integer userId = userT.get("user_id");
