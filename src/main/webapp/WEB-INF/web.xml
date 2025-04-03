@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns="http://jakarta.ee/xml/ns/jakartaee" version="5.0">
-<welcome-file-list>
-    <welcome-file>index.jsp</welcome-file>
-    
-</welcome-file-list>
-<filter>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://jakarta.ee/xml/ns/jakartaee" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd" id="WebApp_ID" version="6.0">
+ <filter>
     <filter-name>JwtFilter</filter-name>
     <filter-class>JWT.JwtFilter</filter-class>
 </filter>
@@ -95,14 +91,7 @@
         <url-pattern>/comment</url-pattern>
     </servlet-mapping>
     
-    <servlet>
-        <servlet-name>index</servlet-name>
-        <servlet-class>servlet.index</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>index</servlet-name>
-        <url-pattern>/</url-pattern>
-    </servlet-mapping> 
+   
     
     <servlet>
         <servlet-name>ChangePassword</servlet-name>
@@ -113,14 +102,6 @@
         <url-pattern>/ChangePassword</url-pattern>
     </servlet-mapping> 
     
-    <servlet>
-        <servlet-name>ChangePassword</servlet-name>
-        <servlet-class>servlet.ChangePassword</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>ChangePassword</servlet-name>
-        <url-pattern>/ChangePassword</url-pattern>
-    </servlet-mapping> 
   
   <servlet>
         <servlet-name>deletePassword</servlet-name>

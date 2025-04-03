@@ -18,7 +18,7 @@
 			</c:when>
 			<c:otherwise>
         <img class="img-thumbnail" style="height: 250px; Width: 250px"
-					src="/uploads/profile_pictures/farid" alt="Profile" width="100" />
+					src="/uploads/profiel.webp" alt="Profile" width="100" />
     </c:otherwise>
 		</c:choose>
 		<div class="d-flex flex-column gap-3 mt-3">
