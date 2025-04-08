@@ -34,19 +34,24 @@ public class share extends HttpServlet {
         	response.sendRedirect("login");
             return;
         }
-        System.out.println(userId+" saved :"+ Integer.parseInt(blog_id));
         stmt1.setInt(1, userId);
         stmt1.setInt(2,  Integer.parseInt(blog_id));
         ResultSet rs = stmt1.executeQuery();
         if(rs.next()) {
-            response.sendRedirect(request.getContextPath() + "/Blog?id="+blog_id);
+        	String referer = request.getHeader("referer");
+            if (referer != null) {
+                response.sendRedirect(referer);
+            }
             return;
         }
         PreparedStatement stmt = con.prepareStatement("INSERT INTO UserSharedBlog(userId,blogId) VALUES(?, ?);");
         stmt.setInt(1, userId);
         stmt.setInt(2,  Integer.parseInt(blog_id));
         stmt.executeUpdate();
-            response.sendRedirect(request.getContextPath() + "/Blog?id="+blog_id);
+        String referer = request.getHeader("referer");
+        if (referer != null) {
+            response.sendRedirect(referer);
+        }
 		}catch(Exception e) {
 			 e.printStackTrace();
 		}

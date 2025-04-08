@@ -35,14 +35,11 @@ public class JwtFilter implements Filter {
    	 request.getRequestDispatcher("WEB-INF/403.jsp").forward(request, response);
    	    return;
    	}
+   	
         System.out.println("FILTER:"+ path);
-        
         chain.doFilter(request, response);
     }
 
-	
-    @Override
-    public void init(FilterConfig filterConfig) throws ServletException {}
 
     @Override
     public void destroy() {}

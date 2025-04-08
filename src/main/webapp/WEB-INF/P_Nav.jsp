@@ -12,9 +12,9 @@
 	crossorigin="anonymous">
 </head>
 <body>
-	<nav class="navbar navbar-expand-lg mb-5 bg-body-tertiary">
+	<nav class=" navbar navbar-expand-lg bg-body-tertiary">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="/">home</a>
+			<a class="navbar-brand" href="/home">home</a>
 			<button class="navbar-toggler" type="button"
 				data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
 				aria-controls="navbarNavDropdown" aria-expanded="false"

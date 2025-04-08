@@ -59,7 +59,7 @@ public class login extends HttpServlet {
                 	jwtCookie.setMaxAge(60 * 60 * 24 * 7);
                 	jwtCookie.setSecure(true); 
                     response.addCookie(jwtCookie);
-                    response.sendRedirect(request.getContextPath() + "/");
+                    response.sendRedirect(request.getContextPath() + "/home");
                     return;
             }
             } else {

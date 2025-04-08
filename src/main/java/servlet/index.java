@@ -1,6 +1,7 @@
 package servlet;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -12,8 +13,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import beans.Blog;
+import beans.GetUserID;
 
 
 public class index extends HttpServlet {
@@ -28,6 +31,13 @@ public class index extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try{
+			Cookie[] cookies = request.getCookies();
+        	Map<String, Integer> user = GetUserID.GetId(cookies);
+            Integer userId=user.get("user_id");
+            if (userId == null) {
+            	response.sendRedirect("login");
+                return;
+            }
         	String URL = "jdbc:mysql://localhost:3306/WebApp";
             String USER = "root";
             String PASSWORD = "";
@@ -50,6 +60,7 @@ public class index extends HttpServlet {
                }
                
                request.setAttribute("blogs", blogs);
+               request.setAttribute("userId", userId);
                request.getRequestDispatcher("WEB-INF/index.jsp").forward(request, response);
            } catch (Exception e) {
 			e.printStackTrace();

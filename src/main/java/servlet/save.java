@@ -34,7 +34,6 @@ public class save extends HttpServlet {
         	response.sendRedirect("login");
             return;
         }
-        System.out.println(userId+" saved :"+ Integer.parseInt(blog_id));
         stmt1.setInt(1, userId);
         stmt1.setInt(2,  Integer.parseInt(blog_id));
         ResultSet rs = stmt1.executeQuery();
@@ -43,14 +42,20 @@ public class save extends HttpServlet {
         	stmt2.setInt(1, userId);
             stmt2.setInt(2,  Integer.parseInt(blog_id));
             stmt2.executeUpdate();
-            response.sendRedirect(request.getContextPath() + "/Blog?id="+blog_id);
+            String referer = request.getHeader("referer");
+            if (referer != null) {
+                response.sendRedirect(referer);
+            }
             return;
         }
         PreparedStatement stmt = con.prepareStatement("INSERT INTO UserSavedBlog(userId,blogId) VALUES(?, ?);");
         stmt.setInt(1, userId);
         stmt.setInt(2,  Integer.parseInt(blog_id));
         stmt.executeUpdate();
-            response.sendRedirect(request.getContextPath() + "/Blog?id="+blog_id);
+        String referer = request.getHeader("referer");
+        if (referer != null) {
+            response.sendRedirect(referer);
+        }
 		}catch(Exception e) {
 			 e.printStackTrace();
 		}

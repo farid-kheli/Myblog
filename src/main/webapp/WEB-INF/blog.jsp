@@ -5,11 +5,41 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>${blog.title}</title>
+<style>
+body {
+  --sb-track-color: #616161;
+  --sb-thumb-color: #010a05;
+  --sb-size: 14px;
+}
+
+::-webkit-scrollbar {
+  width: var(--sb-size)
+}
+
+::-webkit-scrollbar-track {
+  background: var(--sb-track-color);
+  border-radius: 9px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--sb-thumb-color);
+  border-radius: 9px;
+  border: 1px solid #767b84;
+}
+
+@supports not selector(::-webkit-scrollbar) {
+  body {
+    scrollbar-color: var(--sb-thumb-color)
+                     var(--sb-track-color);
+  }
+}
+</style>
 </head>
-<body class=" bg-dark text-light bg-gradient" style="height: 100vh;">
+<body class="  text-light" style="background-image: url('/uploads/Blog_pictures/${blog.id}');background-repeat: none;background-repeat: no-repeat;
+  background-size: cover; height: 100vh;">
 	<%@ include file="P_Nav.jsp"%>
-	
+
 	<div class="d-flex justify-content-between h-75 p-4 w-100">
 		<div>
 			<ul class="d-flex flex-column flex-column gap-3 "
@@ -25,7 +55,7 @@
 							<g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd"
 								clip-rule="evenodd"
 								d="M12 6.00019C10.2006 3.90317 7.19377 3.2551 4.93923 5.17534C2.68468 7.09558 2.36727 10.3061 4.13778 12.5772C5.60984 14.4654 10.0648 18.4479 11.5249 19.7369C11.6882 19.8811 11.7699 19.9532 11.8652 19.9815C11.9483 20.0062 12.0393 20.0062 12.1225 19.9815C12.2178 19.9532 12.2994 19.8811 12.4628 19.7369C13.9229 18.4479 18.3778 14.4654 19.8499 12.5772C21.6204 10.3061 21.3417 7.07538 19.0484 5.17534C16.7551 3.2753 13.7994 3.90317 12 6.00019Z"
-									<c:if test="${liked}">
+								<c:if test="${liked}">
   fill="#880808"	
 </c:if>
 								stroke="#000000" stroke-width="2" stroke-linecap="round"
@@ -41,11 +71,10 @@
 								stroke-linejoin="round"></g>
 							<g id="SVGRepo_iconCarrier"> <path
 								d="M5 6.2C5 5.07989 5 4.51984 5.21799 4.09202C5.40973 3.71569 5.71569 3.40973 6.09202 3.21799C6.51984 3 7.07989 3 8.2 3H15.8C16.9201 3 17.4802 3 17.908 3.21799C18.2843 3.40973 18.5903 3.71569 18.782 4.09202C19 4.51984 19 5.07989 19 6.2V21L12 16L5 21V6.2Z"
-							<c:if test="${saved}">
+								<c:if test="${saved}">
   fill="#FFC300"	
 </c:if>
-							
-							 stroke="#000000" stroke-width="2" stroke-linejoin="round"></path> </g></svg>
+								stroke="#000000" stroke-width="2" stroke-linejoin="round"></path> </g></svg>
 						${num_saves}
 				</a></li>
 				<li><a
@@ -66,14 +95,14 @@
 		</div>
 
 		<div
-			class="bg-dark w-75 rounded p-4 d-flex flex-column align-items-center h-100">
+			class="bg-dark w-75 overflow-scroll  bg-opacity-75 rounded p-4 d-flex flex-column align-items-center h-100">
 			<div class="d-flex align-items-center justify-content-between w-75">
-				<h3> ${blog.getusername() }</h3>
+				<h3>${blog.getusername() }</h3>
 				<small>Published on : ${blog.createdAt}</small>
 			</div>
 			<h1>${blog.title}</h1>
-			
-				<hr class="w-100">
+
+			<hr class="w-100">
 			<div class="w-100">
 				<p>${blog.content}</p>
 			</div>
