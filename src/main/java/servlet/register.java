@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 
 import org.mindrot.jbcrypt.BCrypt;
 
+import DAO.UserDAO;
 import JWT.JwtUtil;
 import beans.User;
 
@@ -61,7 +62,7 @@ public class register extends HttpServlet {
 				String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
 
 				User user = new User(name, email, hashedPassword);
-				user.creat();
+				UserDAO.create(user);
 				response.sendRedirect(request.getContextPath() + "/login");
 			}
 

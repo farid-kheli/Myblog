@@ -10,6 +10,9 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.Part;
 import java.util.Random;
 import java.util.stream.Collectors;
+
+import DAO.CategoryDAO;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -44,18 +47,7 @@ public class Dashbord extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
         try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/WebApp", "root", "");
-	        PreparedStatement stmt = conn.prepareStatement("SELECT * FROM categories;");
-	        ResultSet rs = stmt.executeQuery();
-	        List<Categry> categrys = new ArrayList<>();
-	        while (rs.next()) {
-	        	categrys.add(new Categry(
-	        			rs.getInt("id"),
-	        			rs.getString("name")
-	        			));
-	        }
-	        System.out.println(categrys);
+        	List<Categry> categrys= CategoryDAO.getcategorys();
 	        request.setAttribute("categrys", categrys);
 			request.getRequestDispatcher("WEB-INF/dashbord.jsp").forward(request, response);
 		} catch (Exception e) {
@@ -92,10 +84,6 @@ public class Dashbord extends HttpServlet {
 		        	response.sendRedirect("login");
 		            return;
 		        }
-	             
-	            
-	            
-	        	User user = User.GetUser(userId);
 	            Class.forName("com.mysql.cj.jdbc.Driver");
 	            Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
 	            PreparedStatement stmt = conn.prepareStatement("INSERT INTO blogs (title, content, author_id, category_id,discription) VALUES (?, ?, ?, ?,?)"
@@ -104,7 +92,7 @@ public class Dashbord extends HttpServlet {
 	            
 	            stmt.setString(1, title);
 	            stmt.setString(2, content);
-	            stmt.setInt(3, user.getId());
+	            stmt.setInt(3, userId);
 	            stmt.setInt(4,Integer.parseInt(categry) );
 	            stmt.setString(5, discription);
 	            stmt.executeUpdate();

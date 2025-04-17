@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+import DAO.BlogDAO;
 import beans.Blog;
 
 import beans.Comment;
@@ -29,18 +30,17 @@ public class blog extends HttpServlet {
             	response.sendRedirect("login");
                 return;
             }
-			String blog_ids = request.getParameter("id");
-            Blog blog = Blog.getBloge(Integer.parseInt(blog_ids));
+			String blog_id = request.getParameter("id");
+            Blog blog = BlogDAO.getBlogById(Integer.parseInt(blog_id));
 
             
             if (blog != null) {
-                
-                int numlikes=blog.getLikes();
-                int numsaves=blog.getSaves();
-                int numshares=blog.getShares();
-                List<Comment> Comment=blog.getComents();
-                    boolean liked=blog.Liked(userId);
-                    boolean saved=blog.Saved(userId);
+                int numlikes=BlogDAO.getLikes(blog.getId());
+                int numsaves=BlogDAO.getSaves(blog.getId());
+                int numshares=BlogDAO.getShares(blog.getId());
+                List<Comment> Comment=BlogDAO.getComments(blog.getId());
+                    boolean liked=BlogDAO.isLiked(blog.getId(),userId);
+                    boolean saved=BlogDAO.isSaved(blog.getId(),userId);
                     request.setAttribute("blog", blog);
                     request.setAttribute("liked", liked);
                     request.setAttribute("saved", saved);
@@ -59,5 +59,9 @@ public class blog extends HttpServlet {
         }
 		
 	}
+
+
+
+
 
 }

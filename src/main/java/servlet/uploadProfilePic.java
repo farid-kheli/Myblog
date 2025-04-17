@@ -17,6 +17,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.util.Map;
 
+import DAO.UserDAO;
 import beans.GetUserID;
 import beans.User;
 
@@ -37,7 +38,7 @@ public class uploadProfilePic extends HttpServlet {
         	response.sendRedirect("login");
             return;
         }
-        User user= User.GetUser(userId);
+        User user= UserDAO.getUserById(userId);
         	Part filePart = request.getPart("profilePic");
             String uploadPath =  "uploads"+ File.separator + "profile_pictures";
             

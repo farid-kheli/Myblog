@@ -95,7 +95,7 @@ body {
 		</div>
 
 		<div
-			class="bg-dark w-75 overflow-scroll  bg-opacity-75 rounded p-4 d-flex flex-column align-items-center h-100">
+			class="bg-dark w-75 overflow-scroll  rounded p-4 d-flex flex-column align-items-center h-100" style="opacity: 0.9;">
 			<div class="d-flex align-items-center justify-content-between w-75">
 				<h3>${blog.getusername() }</h3>
 				<small>Published on : ${blog.createdAt}</small>

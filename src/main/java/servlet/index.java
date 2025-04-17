@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import DAO.BlogDAO;
 import beans.Blog;
 import beans.GetUserID;
 

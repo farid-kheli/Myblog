@@ -15,13 +15,13 @@
 		<url-pattern>/setting</url-pattern>
 		<url-pattern>/profiel</url-pattern>
 		<url-pattern>/admin</url-pattern>
+		<url-pattern>/DeleteBloge</url-pattern>
 		<url-pattern>/admin/categorys</url-pattern>
 		<url-pattern>/admin/bloges</url-pattern>
 		<url-pattern>/admin/categorys</url-pattern>
 		<url-pattern>/admin/categorys</url-pattern>
 		<url-pattern>/admin/categorys</url-pattern>
 	</filter-mapping>
-
 	<servlet>
 		<servlet-name>HelloServlet</servlet-name>
 		<servlet-class>servlet.login</servlet-class>
@@ -64,6 +64,14 @@
 		<url-pattern>/register</url-pattern>
 	</servlet-mapping>
 
+<servlet>
+		<servlet-name>DeleteBloge</servlet-name>
+		<servlet-class>servlet.DeletBloge</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DeleteBloge</servlet-name>
+		<url-pattern>/DeleteBloge</url-pattern>
+	</servlet-mapping>
 
 	<servlet>
 		<servlet-name>user_likes</servlet-name>
@@ -219,6 +227,7 @@
 		<servlet-name>saveBlog</servlet-name>
 		<url-pattern>/saveBlog</url-pattern>
 	</servlet-mapping>
+	
 	<servlet>
 		<servlet-name>MyBloges</servlet-name>
 		<servlet-class>servlet.MyBloges</servlet-class>
@@ -226,5 +235,14 @@
 	<servlet-mapping>
 		<servlet-name>MyBloges</servlet-name>
 		<url-pattern>/MyBloges</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>EditBlog</servlet-name>
+		<servlet-class>servlet.EditBlog</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>EditBlog</servlet-name>
+		<url-pattern>/EditBlog</url-pattern>
 	</servlet-mapping>
 </web-app>

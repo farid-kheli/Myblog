@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import DAO.UserDAO;
 import beans.Blog;
 import beans.GetUserID;
 import beans.User;
@@ -36,7 +37,7 @@ public class profil extends HttpServlet {
         	response.sendRedirect("login");
             return;
         }
-			User user = User.GetUser(userId);
+			User user = UserDAO.getUserById(userId);
 			Class.forName("com.mysql.cj.jdbc.Driver");
 	        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/WebApp", "root", "");
 	        PreparedStatement stmt1 = con.prepareStatement("SELECT * FROM blogs WHERE id IN (SELECT blogId FROM UserLikedBlog WHERE userId=?)");

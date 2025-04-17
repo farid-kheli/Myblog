@@ -14,6 +14,7 @@ import java.util.Map;
 
 import org.mindrot.jbcrypt.BCrypt;
 
+import DAO.UserDAO;
 import beans.GetUserID;
 import beans.User;
 
@@ -51,8 +52,7 @@ public class ChangePassword extends HttpServlet {
 				if (!BCrypt.checkpw(password, storedHashedPassword)) {
 					request.setAttribute("message", "❌ Incorrect password!");
 				} else {
-					User user=User.GetUser(userId);
-					user.ChengePassword(hashedPassword);
+					UserDAO.updatePassword(userId,hashedPassword);
 					response.sendRedirect(request.getContextPath() + "/logout");
 					return;
 				}

@@ -31,8 +31,8 @@
 							<td>${blog.createdAt}</td>
 							<td>
 								<a href="Blog?id=${blog.id}" type="button" class="btn btn-primary">Check out</a>
-								<a type="button" class="btn btn-warning">Update</a>
-								<a type="button" class="btn btn-danger">Delete</a>
+								<a href="EditBlog?id=${blog.id}" type="button" class="btn btn-warning">Update</a>
+								<a href="DeleteBloge?id=${blog.id}" type="button" class="btn btn-danger">Delete</a>
 							</td>
 						</tr>
 					</c:forEach>

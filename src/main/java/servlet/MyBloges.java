@@ -69,7 +69,7 @@ public class MyBloges extends HttpServlet {
                            rs.getInt("category_id")
                    ));
                }
-               
+
                request.setAttribute("blogs", blogs);
                request.getRequestDispatcher("WEB-INF/MyBloges.jsp").forward(request, response);
            } catch (Exception e) {
