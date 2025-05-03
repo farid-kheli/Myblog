@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="https://jakarta.ee/xml/ns/jakartaee"
+	xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
+	id="WebApp_ID" version="6.0">
+	<filter>
+		<filter-name>JwtFilter</filter-name>
+		<filter-class>JWT.JwtFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>JwtFilter</filter-name>
+		<url-pattern>/home</url-pattern>
+		<url-pattern>/MyBloges</url-pattern>
+		<url-pattern>/dashbord</url-pattern>
+		<url-pattern>/setting</url-pattern>
+		<url-pattern>/profiel</url-pattern>
+		<url-pattern>/admin</url-pattern>
+		<url-pattern>/DeleteBloge</url-pattern>
+		<url-pattern>/admin/categorys</url-pattern>
+		<url-pattern>/admin/bloges</url-pattern>
+		<url-pattern>/admin/categorys</url-pattern>
+		<url-pattern>/admin/categorys</url-pattern>
+		<url-pattern>/admin/categorys</url-pattern>
+	</filter-mapping>
+	<servlet>
+		<servlet-name>HelloServlet</servlet-name>
+		<servlet-class>servlet.login</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>HelloServlet</servlet-name>
+		<url-pattern>/login</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>DisplayBlog</servlet-name>
+		<servlet-class>servlet.blog</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DisplayBlog</servlet-name>
+		<url-pattern>/Blog</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>lougout</servlet-name>
+		<servlet-class>servlet.logout</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>lougout</servlet-name>
+		<url-pattern>/logout</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>profiel</servlet-name>
+		<servlet-class>servlet.profil</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>profiel</servlet-name>
+		<url-pattern>/profiel</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>search</servlet-name>
+		<servlet-class>servlet.search</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>search</servlet-name>
+		<url-pattern>/search</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>tage</servlet-name>
+		<servlet-class>servlet.tage</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>tage</servlet-name>
+		<url-pattern>/tage</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>MySaves</servlet-name>
+		<servlet-class>servlet.MySaves</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MySaves</servlet-name>
+		<url-pattern>/MySaves</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>MyLikes</servlet-name>
+		<servlet-class>servlet.MyLikes</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MyLikes</servlet-name>
+		<url-pattern>/MyLikes</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>register</servlet-name>
+		<servlet-class>servlet.register</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>register</servlet-name>
+		<url-pattern>/register</url-pattern>
+	</servlet-mapping>
+
+<servlet>
+		<servlet-name>DeleteBloge</servlet-name>
+		<servlet-class>servlet.DeletBloge</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DeleteBloge</servlet-name>
+		<url-pattern>/DeleteBloge</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>user_likes</servlet-name>
+		<servlet-class>servlet.like</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>user_likes</servlet-name>
+		<url-pattern>/like</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>user_saves</servlet-name>
+		<servlet-class>servlet.save</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>user_saves</servlet-name>
+		<url-pattern>/save</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>user_shares</servlet-name>
+		<servlet-class>servlet.share</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>user_shares</servlet-name>
+		<url-pattern>/share</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>user_comments</servlet-name>
+		<servlet-class>servlet.comment</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>user_comments</servlet-name>
+		<url-pattern>/comment</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>index</servlet-name>
+		<servlet-class>servlet.index</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>index</servlet-name>
+		<url-pattern>/home</url-pattern>
+	</servlet-mapping>
+
+
+	<servlet>
+		<servlet-name>ChangePassword</servlet-name>
+		<servlet-class>servlet.ChangePassword</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ChangePassword</servlet-name>
+		<url-pattern>/ChangePassword</url-pattern>
+	</servlet-mapping>
+
+
+	<servlet>
+		<servlet-name>deletePassword</servlet-name>
+		<servlet-class>servlet.deletePassword</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>deletePassword</servlet-name>
+		<url-pattern>/deletePassword</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>displayusers</servlet-name>
+		<servlet-class>admin.display_users</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>displayusers</servlet-name>
+		<url-pattern>/admin</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>DeleteBlog</servlet-name>
+		<servlet-class>admin.deleteblog</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DeleteBlog</servlet-name>
+		<url-pattern>/Delete/Blog</url-pattern>
+	</servlet-mapping>
+
+
+	<servlet>
+		<servlet-name>chengeusername</servlet-name>
+		<servlet-class>servlet.chengeusername</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>chengeusername</servlet-name>
+		<url-pattern>/chengeusername</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>setting</servlet-name>
+		<servlet-class>servlet.setting</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>setting</servlet-name>
+		<url-pattern>/setting</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>AdminBlogs</servlet-name>
+		<servlet-class>admin.admin</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AdminBlogs</servlet-name>
+		<url-pattern>/admin/bloges</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>Manage_categorys</servlet-name>
+		<servlet-class>admin.category</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Manage_categorys</servlet-name>
+		<url-pattern>/admin/categorys</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>Manage_ADD_categorys</servlet-name>
+		<servlet-class>admin.Addcategory</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Manage_ADD_categorys</servlet-name>
+		<url-pattern>/admin/AddCategory</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>uploadProfilePic</servlet-name>
+		<servlet-class>servlet.uploadProfilePic</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>uploadProfilePic</servlet-name>
+		<url-pattern>/uploadProfilePic</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+
+		<servlet-name>dashbord</servlet-name>
+		<servlet-class>servlet.Dashbord</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>dashbord</servlet-name>
+		<url-pattern>/dashbord</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>saveBlog</servlet-name>
+		<servlet-class>servlet.Dashbord</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>saveBlog</servlet-name>
+		<url-pattern>/saveBlog</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>MyBloges</servlet-name>
+		<servlet-class>servlet.MyBloges</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MyBloges</servlet-name>
+		<url-pattern>/MyBloges</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>EditBlog</servlet-name>
+		<servlet-class>servlet.EditBlog</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>EditBlog</servlet-name>
+		<url-pattern>/EditBlog</url-pattern>
+	</servlet-mapping>
+</web-app>
