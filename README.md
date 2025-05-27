@@ -75,18 +75,14 @@ MyBlog is a secure blogging platform built using **Java EE**, **JSP**, and **Ser
 
 ---
 
+## 🙌 Related Repo
+- [MyBlogAPI](https://github.com/farid-kheli/MyBlogAPI) service is a backed that searve the website blogs
+- [SmartContract](#) the SmartContract used for Tiping ather withe eth  
+---
+
 ## 📜 License
 
 This project is open-source under the [MIT License](LICENSE).
 
----
 
-## 🙌 Related Repo
-- [MyBlogAPI](https://github.com/farid-kheli/MyBlogAPI) service is a backed that searve the website blogs
-- [SmartContract](#) the SmartContract used for Tiping ather withe eth  
 
-## 💡 Future Enhancements
-
-- ✨ Full text search and tagging support
-- 📱 Responsive PWA support
-- 💬 Real-time chat or messaging between bloggers
