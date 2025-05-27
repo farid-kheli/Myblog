@@ -59,6 +59,20 @@ public class UserDAO {
 	        }
 	        return null;
 	    }
+	    public static String getAtherADDRESSById(String id) throws Exception {
+	        try (Connection con = getConnection()) {
+	            String sql = "SELECT wallet_address FROM users WHERE id = ?";
+	            PreparedStatement stmt = con.prepareStatement(sql);
+	            stmt.setString(1, id);
+
+	            ResultSet rs = stmt.executeQuery();
+	            String result  = null;
+	            if (rs.next()) {
+	                result = rs.getString("wallet_address");
+	            }
+	            return result;
+	        }
+	    }
 
 	    public static boolean updatePassword(int userId, String hashedPassword) throws Exception {
 	        try (Connection con = getConnection()) {

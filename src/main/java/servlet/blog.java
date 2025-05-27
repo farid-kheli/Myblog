@@ -1,7 +1,6 @@
 package servlet;
 
 import jakarta.servlet.ServletException;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -9,6 +8,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+import jakarta.servlet.http.Cookie;
 import DAO.BlogDAO;
 import beans.Blog;
 
@@ -23,17 +23,15 @@ public class blog extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		try {
-			Cookie[] cookies = request.getCookies();
-        	Map<String, Integer> user = GetUserID.GetId(cookies);
-            Integer userId=user.get("user_id");
-            if (userId == null) {
-            	response.sendRedirect("login");
-                return;
-            }
 			String blog_id = request.getParameter("id");
             Blog blog = BlogDAO.getBlogById(Integer.parseInt(blog_id));
-
-            
+            Cookie[] cookies = request.getCookies();
+			Map<String, Integer> userT = GetUserID.GetId(cookies);
+			 Integer userId = userT.get("user_id");
+        if (userId == 0) {
+        	response.sendRedirect("login");
+            return;
+        }
             if (blog != null) {
                 int numlikes=BlogDAO.getLikes(blog.getId());
                 int numsaves=BlogDAO.getSaves(blog.getId());

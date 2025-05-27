@@ -115,5 +115,8 @@ public class Blog {
     public String getCategory() throws Exception {
     	return CategoryDAO.getCategoryById(this.CID);
     }
+    public Boolean autherhaveAddress() throws Exception {
+    	return (UserDAO.getAtherADDRESSById(""+this.id) == null);
+    }
     
 }

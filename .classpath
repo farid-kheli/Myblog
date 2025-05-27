@@ -33,5 +33,21 @@
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/mysql-connector-java-8.0.30.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/opencensus-api-0.28.3.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/opencensus-contrib-http-util-0.28.3.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/core-5.0.0.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/crypto-5.0.0.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/utils-5.0.0.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/abi-5.0.0.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/rxjava-2.2.21.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/tuples-5.0.0.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/reactive-streams-1.0.3.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/okhttp-4.12.0.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/kotlin-stdlib-1.9.0.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/slf4j-api-2.0.13.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/slf4j-simple-2.0.13.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/okio-3.7.0.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/okio-jvm-3.11.0.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/bcprov-jdk15to18-1.76.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/core-4.10.3.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/rlp-5.0.0.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

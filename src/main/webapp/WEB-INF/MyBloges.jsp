@@ -1,276 +1,732 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en-us">
 <head>
-  <meta charset="utf-8">
-  <title>Reader | Hugo Personal Blog Template</title>
+<meta charset="utf-8">
+<title>My Blogs - Reader Platform</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="Manage your blog posts">
+<meta name="author" content="Themefisher">
 
-  <!-- mobile responsive meta -->
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="This is meta description">
-  <meta name="author" content="Themefisher">
-  <meta name="generator" content="Hugo 0.74.3" />
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-  <!-- plugins -->
-  
-  <link rel="stylesheet" href="plugins/bootstrap/bootstrap.min.css">
-  <link rel="stylesheet" href="plugins/themify-icons/themify-icons.css">
-  <link rel="stylesheet" href="plugins/slick/slick.css">
+<!-- Original stylesheets -->
+<link rel="stylesheet" href="plugins/bootstrap/bootstrap.min.css">
+<link rel="stylesheet" href="plugins/themify-icons/themify-icons.css">
+<link rel="stylesheet" href="plugins/slick/slick.css">
+<link rel="stylesheet" href="css/style.css" media="screen">
 
-  <!-- Main Stylesheet -->
-  <link rel="stylesheet" href="css/style.css" media="screen">
+<!--Favicon-->
+<link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
+<link rel="icon" href="images/favicon.png" type="image/x-icon">
 
-  <!--Favicon-->
-  <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
-  <link rel="icon" href="images/favicon.png" type="image/x-icon">
+<style>
+	:root {
+		--primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+		--secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+		--success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+		--warning-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+		--danger-gradient: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+		--dark-bg: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+		--glass-bg: rgba(255, 255, 255, 0.1);
+		--glass-border: rgba(255, 255, 255, 0.2);
+	}
 
-  <meta property="og:title" content="Reader | Hugo Personal Blog Template" />
-  <meta property="og:description" content="This is meta description" />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="" />
-  <meta property="og:updated_time" content="2020-03-15T15:40:24+06:00" />
-  <script
-	src="https://cdn.tiny.cloud/1/da91lze1q4ce30bdj8na78ygotv4sushpwqxdm0y39ccoqnz/tinymce/7/tinymce.min.js"
-	referrerpolicy="origin"></script>
-  <script>
-	tinymce
-			.init({
-				selector : '#content',
-				plugins : 'lists link image table',
-				toolbar : 'undo redo | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
-			});
-</script>
+	body {
+		background: var(--dark-bg);
+		min-height: 100vh;
+		font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+		overflow-x: hidden;
+	}
+
+	/* Animated background particles */
+	body::before {
+		content: '';
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-image: 
+			radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+			radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+			radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.3) 0%, transparent 50%);
+		animation: float 20s ease-in-out infinite;
+		z-index: -1;
+	}
+
+	@keyframes float {
+		0%, 100% { transform: translateY(0px) rotate(0deg); }
+		33% { transform: translateY(-30px) rotate(120deg); }
+		66% { transform: translateY(15px) rotate(240deg); }
+	}
+
+	/* Header section */
+	.header {
+		position: relative;
+		padding: 150px 0 100px;
+		overflow: hidden;
+		background: transparent;
+	}
+
+	.header h1 {
+		color: white;
+		font-size: 3rem;
+		font-weight: 300;
+		text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+		margin-bottom: 1.5rem;
+		animation: slideUp 1s ease-out;
+	}
+
+	.header h1 span {
+		background: var(--warning-gradient);
+		-webkit-background-clip: text;
+		background-clip: text;
+		-webkit-text-fill-color: transparent;
+		font-weight: 600;
+	}
+
+	@keyframes slideUp {
+		from {
+			opacity: 0;
+			transform: translateY(50px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	.list-inline-item a {
+		color: rgba(255, 255, 255, 0.8) !important;
+		text-decoration: none;
+		transition: color 0.3s ease;
+	}
+
+	.list-inline-item a:hover {
+		color: #ffd700 !important;
+	}
+
+	.text-primary {
+		color: #ffd700 !important;
+	}
+
+	/* Main container */
+	.blogs-container {
+		background: var(--glass-bg);
+		backdrop-filter: blur(20px);
+		border: 1px solid var(--glass-border);
+		border-radius: 20px;
+		box-shadow: 
+			0 8px 32px 0 rgba(31, 38, 135, 0.37),
+			inset 0 1px 0 rgba(255, 255, 255, 0.2);
+		animation: slideUp 0.6s ease-out 0.3s both;
+		overflow: hidden;
+		margin-bottom: 50px;
+	}
+
+	/* Header section inside container */
+	.blogs-header {
+		background: rgba(255, 255, 255, 0.05);
+		padding: 30px;
+		border-bottom: 1px solid var(--glass-border);
+		text-align: center;
+	}
+
+	.blogs-header h2 {
+		color: white;
+		font-weight: 600;
+		margin-bottom: 15px;
+		font-size: 1.8rem;
+	}
+
+	.blogs-header p {
+		color: rgba(255, 255, 255, 0.8);
+		margin-bottom: 20px;
+	}
+
+	.btn-create {
+		background: var(--success-gradient);
+		border: none;
+		color: white;
+		font-weight: 600;
+		padding: 12px 25px;
+		border-radius: 25px;
+		transition: all 0.3s ease;
+		box-shadow: 0 4px 15px rgba(79, 172, 254, 0.4);
+		text-decoration: none;
+		display: inline-block;
+	}
+
+	.btn-create:hover {
+		transform: translateY(-3px);
+		box-shadow: 0 8px 25px rgba(79, 172, 254, 0.6);
+		color: white;
+	}
+
+	/* Blog cards grid */
+	.blogs-grid {
+		padding: 30px;
+	}
+
+	.blog-card {
+		background: rgba(255, 255, 255, 0.08);
+		backdrop-filter: blur(10px);
+		border: 1px solid rgba(255, 255, 255, 0.1);
+		border-radius: 15px;
+		padding: 25px;
+		margin-bottom: 20px;
+		transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+		position: relative;
+		overflow: hidden;
+	}
+
+	.blog-card::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: -100%;
+		width: 100%;
+		height: 100%;
+		background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+		transition: left 0.6s ease;
+	}
+
+	.blog-card:hover::before {
+		left: 100%;
+	}
+
+	.blog-card:hover {
+		transform: translateY(-5px);
+		box-shadow: 0 15px 35px rgba(31, 38, 135, 0.4);
+		border-color: rgba(255, 255, 255, 0.2);
+	}
+
+	.blog-card-header {
+		display: flex;
+		justify-content: between;
+		align-items: flex-start;
+		margin-bottom: 15px;
+	}
+
+	.blog-id {
+		background: var(--primary-gradient);
+		color: white;
+		padding: 5px 12px;
+		border-radius: 20px;
+		font-size: 0.85rem;
+		font-weight: 600;
+		min-width: 60px;
+		text-align: center;
+	}
+
+	.blog-title {
+		color: white;
+		font-size: 1.3rem;
+		font-weight: 600;
+		margin: 0 0 10px 0;
+		line-height: 1.4;
+		flex: 1;
+		margin-left: 15px;
+	}
+
+	.blog-description {
+		color: rgba(255, 255, 255, 0.8);
+		margin-bottom: 15px;
+		line-height: 1.5;
+		display: -webkit-box;
+		-webkit-line-clamp: 2;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+	}
+
+	.blog-meta {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 20px;
+		flex-wrap: wrap;
+		gap: 10px;
+	}
+
+	.blog-date {
+		color: rgba(255, 255, 255, 0.7);
+		font-size: 0.9rem;
+		display: flex;
+		align-items: center;
+		gap: 5px;
+	}
+
+	.blog-actions {
+		display: flex;
+		gap: 10px;
+		flex-wrap: wrap;
+	}
+
+	.btn-action {
+		padding: 8px 16px;
+		border-radius: 20px;
+		border: none;
+		font-weight: 500;
+		font-size: 0.85rem;
+		transition: all 0.3s ease;
+		text-decoration: none;
+		display: inline-flex;
+		align-items: center;
+		gap: 5px;
+	}
+
+	.btn-view {
+		background: var(--primary-gradient);
+		color: white;
+		box-shadow: 0 3px 10px rgba(102, 126, 234, 0.3);
+	}
+
+	.btn-view:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 5px 15px rgba(102, 126, 234, 0.5);
+		color: white;
+	}
+
+	.btn-edit {
+		background: var(--warning-gradient);
+		color: white;
+		box-shadow: 0 3px 10px rgba(250, 112, 154, 0.3);
+	}
+
+	.btn-edit:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 5px 15px rgba(250, 112, 154, 0.5);
+		color: white;
+	}
+
+	.btn-delete {
+		background: var(--danger-gradient);
+		color: white;
+		box-shadow: 0 3px 10px rgba(255, 107, 107, 0.3);
+	}
+
+	.btn-delete:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 5px 15px rgba(255, 107, 107, 0.5);
+		color: white;
+	}
+
+	/* Empty state */
+	.empty-state {
+		text-align: center;
+		padding: 60px 30px;
+		color: rgba(255, 255, 255, 0.8);
+	}
+
+	.empty-state i {
+		font-size: 4rem;
+		margin-bottom: 20px;
+		color: rgba(255, 255, 255, 0.5);
+	}
+
+	.empty-state h3 {
+		color: white;
+		margin-bottom: 15px;
+	}
+
+	.empty-state p {
+		margin-bottom: 25px;
+		font-size: 1.1rem;
+	}
+
+	/* Footer styling */
+	.footer {
+		background: rgba(30, 60, 114, 0.9);
+		backdrop-filter: blur(20px);
+		border-top: 1px solid var(--glass-border);
+		color: white;
+		margin-top: 50px;
+	}
+
+	.instafeed h2 {
+		color: white;
+		margin-bottom: 30px;
+	}
+
+	.instagram-post img {
+		border-radius: 15px;
+		transition: transform 0.3s ease;
+		border: 2px solid var(--glass-border);
+	}
+
+	.instagram-post:hover img {
+		transform: scale(1.05);
+	}
+
+	.footer-list a {
+		color: rgba(255, 255, 255, 0.7);
+		text-decoration: none;
+		transition: color 0.3s ease;
+	}
+
+	.footer-list a:hover {
+		color: #ffd700;
+	}
+
+	/* Stats bar */
+	.stats-bar {
+		display: flex;
+		justify-content: space-around;
+		padding: 20px;
+		background: rgba(255, 255, 255, 0.05);
+		border-radius: 15px;
+		margin-bottom: 30px;
+	}
+
+	.stat-item {
+		text-align: center;
+		color: white;
+	}
+
+	.stat-number {
+		font-size: 1.8rem;
+		font-weight: 600;
+		display: block;
+		background: var(--success-gradient);
+		-webkit-background-clip: text;
+		background-clip: text;
+		-webkit-text-fill-color: transparent;
+	}
+
+	.stat-label {
+		font-size: 0.9rem;
+		color: rgba(255, 255, 255, 0.7);
+		margin-top: 5px;
+	}
+
+	/* Responsive design */
+	@media (max-width: 768px) {
+		.header h1 {
+			font-size: 2rem;
+		}
+		
+		.blog-card {
+			padding: 20px;
+		}
+		
+		.blog-card-header {
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 10px;
+		}
+		
+		.blog-title {
+			margin-left: 0;
+		}
+		
+		.blog-meta {
+			flex-direction: column;
+			align-items: flex-start;
+		}
+		
+		.blog-actions {
+			width: 100%;
+			justify-content: flex-start;
+		}
+		
+		.stats-bar {
+			flex-direction: column;
+			gap: 15px;
+		}
+	}
+
+	/* Loading animation */
+	@keyframes pulse {
+		0%, 100% { opacity: 1; }
+		50% { opacity: 0.5; }
+	}
+
+	.loading {
+		animation: pulse 1.5s ease-in-out infinite;
+	}
+</style>
 </head>
 <body>
-  <!-- navigation -->
-<header class="navigation fixed-top">
-  <div class="container">
-    <nav class="navbar navbar-expand-lg navbar-white">
-				<a class="navbar-brand order-1" href="index.html"> <img
-					class="img-fluid" width="100px" src="images/logo.png"
-					alt="Reader | Hugo Personal Blog Template">
-				</a>
-				<div class="collapse navbar-collapse text-center order-lg-2 order-3"
-					id="navigation">
-					<ul class="navbar-nav mx-auto">
-						<li class="nav-item dropdown"><a class="nav-link" href=home
-							aria-haspopup="true" aria-expanded="false"> homepage </a></li>
+	<%@ include file="P_Nav.jsp" %>
 
-
-						<li class="nav-item"><a class="nav-link" href="dashbord">Write
-								Now</a></li>
-
-
-
-						<li class="nav-item"><a class="nav-link" href="MyBloges">My
-								Bloges</a></li>
-						<li class="nav-item dropdown"><a class="nav-link" href="#"
-							role="button" data-toggle="dropdown" aria-haspopup="true"
-							aria-expanded="false"> profiel <i class="ti-angle-down ml-1"></i>
-						</a>
-							<div class="dropdown-menu">
-
-								<a class="dropdown-item" href="profiel">profiel</a>
-								<a class="dropdown-item" href="MyLikes">My Liked Posts</a> 
-								<a class="dropdown-item" href="MySaves">My Saved Posts</a> 
-								 <a class="dropdown-item" href="setting">setting</a> <a
-									class="dropdown-item" href="logout">logout</a>
-							</div></li>
+	<!-- Header Section -->
+	<div class="header text-center">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-9 mx-auto">
+					<h1 class="mb-4">My <span>Blog Posts</span></h1>
+					<ul class="list-inline">
+						<li class="list-inline-item text-primary">
+							<i class="fas fa-blog me-2"></i>My Blogs
+						</li>
+						<li class="list-inline-item">
+							<a href="dashbord"><i class="fas fa-plus me-2"></i>/ Create New</a>
+						</li>
 					</ul>
 				</div>
+			</div>
+		</div>
+	</div>
 
-				<div class="order-2 order-lg-3 d-flex align-items-center">
-					<select class="m-2 border-0 bg-transparent" id="select-language">
-						<option id="en" value="" selected>En</option>
-						<option id="fr" value="">Fr</option>
-					</select>
- 
-					<form action="search" method="post" class="search-bar">
-						<input id="search-query" name="search" type="search"
-							placeholder="Type &amp; Hit Enter...">
-					</form>
+	<!-- Main Content Section -->
+	<section class="section-sm">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-lg-10">
+					<div class="blogs-container">
+						<!-- Header -->
+						<div class="blogs-header">
+							<h2><i class="fas fa-newspaper me-3"></i>Manage Your Content</h2>
+							<p>Create, edit, and manage all your blog posts from one place</p>
+							<a href="dashbord" class="btn-create">
+								<i class="fas fa-plus me-2"></i>Create New Blog
+							</a>
+						</div>
 
-					<button class="navbar-toggler border-0 order-1" type="button"
-						data-toggle="collapse" data-target="#navigation">
-						<i class="ti-menu"></i>
-					</button>
+						<div class="blogs-grid">
+							<!-- Stats Bar -->
+							<c:if test="${not empty blogs}">
+								<div class="stats-bar">
+									<div class="stat-item">
+										<span class="stat-number">${blogs.size()}</span>
+										<div class="stat-label">Total Posts</div>
+									</div>
+									<div class="stat-item">
+										<span class="stat-number">
+											<c:set var="totalViews" value="0" />
+											<c:forEach var="blog" items="${blogs}">
+												<c:set var="totalViews" value="${totalViews + (blog.likes != null ? blog.likes : 0)}" />
+											</c:forEach>
+											${totalViews}
+										</span>
+										<div class="stat-label">Total Likes</div>
+									</div>
+									<div class="stat-item">
+										<span class="stat-number">
+											<c:set var="totalSaves" value="0" />
+											<c:forEach var="blog" items="${blogs}">
+												<c:set var="totalSaves" value="${totalSaves + (blog.saves != null ? blog.saves : 0)}" />
+											</c:forEach>
+											${totalSaves}
+										</span>
+										<div class="stat-label">Total Saves</div>
+									</div>
+								</div>
+							</c:if>
+
+							<!-- Blog Posts -->
+							<c:choose>
+								<c:when test="${not empty blogs}">
+									<c:forEach var="blog" items="${blogs}" varStatus="status">
+										<div class="blog-card" style="animation-delay: ${status.index * 0.1}s">
+											<div class="blog-card-header">
+												<div class="blog-id">#${blog.id}</div>
+												<h3 class="blog-title">${blog.title}</h3>
+											</div>
+											
+											<p class="blog-description">${blog.discription}</p>
+											
+											<div class="blog-meta">
+												<div class="blog-date">
+													<i class="fas fa-calendar-alt"></i>
+													<span>${blog.createdAt}</span>
+												</div>
+												
+												<div class="blog-actions">
+													<a href="Blog?id=${blog.id}" class="btn-action btn-view">
+														<i class="fas fa-eye"></i>View
+													</a>
+													<a href="EditBlog?id=${blog.id}" class="btn-action btn-edit">
+														<i class="fas fa-edit"></i>Edit
+													</a>
+													<a href="DeleteBloge?id=${blog.id}" class="btn-action btn-delete" 
+														onclick="return confirm('Are you sure you want to delete this blog post?')">
+														<i class="fas fa-trash"></i>Delete
+													</a>
+												</div>
+											</div>
+										</div>
+									</c:forEach>
+								</c:when>
+								<c:otherwise>
+									<div class="empty-state">
+										<i class="fas fa-file-alt"></i>
+										<h3>No Blog Posts Yet</h3>
+										<p>You haven't created any blog posts yet. Start sharing your thoughts with the world!</p>
+										<a href="dashbord" class="btn-create">
+											<i class="fas fa-plus me-2"></i>Create Your First Blog
+										</a>
+									</div>
+								</c:otherwise>
+							</c:choose>
+						</div>
+					</div>
 				</div>
+			</div>
+		</div>
+	</section>
 
-			</nav>
-  </div>
-</header>
-<!-- /navigation -->
-<div class="header text-center">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-9 mx-auto">
-        <h1 class="mb-4">Create a Blog Post</h1>
-        <ul class="list-inline">
-        
-          <li class="list-inline-item text-primary">My Blogs </li>
-          <li class="list-inline-item"> <a class="text-default" href="dashbord"> / &nbsp; &nbsp; Create
-              </a></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  
-  <svg class="header-shape-1" width="39" height="40" viewBox="0 0 39 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M0.965848 20.6397L0.943848 38.3906L18.6947 38.4126L18.7167 20.6617L0.965848 20.6397Z" stroke="#040306"
-      stroke-miterlimit="10" />
-    <path class="path" d="M10.4966 11.1283L10.4746 28.8792L28.2255 28.9012L28.2475 11.1503L10.4966 11.1283Z" />
-    <path d="M20.0078 1.62949L19.9858 19.3804L37.7367 19.4024L37.7587 1.65149L20.0078 1.62949Z" stroke="#040306"
-      stroke-miterlimit="10" />
-  </svg>
+	<!-- Footer -->
+	<footer class="footer">
+		<div class="instafeed text-center mb-5">
+			<h2 class="h3 mb-4">
+				<i class="fab fa-instagram me-2"></i>INSTAGRAM POSTS
+			</h2>
+			<div class="instagram-slider">
+				<!-- ...existing instagram posts structure... -->
+				<div class="instagram-post"><img src="images/instagram/1.jpg"></div>
+				<div class="instagram-post"><img src="images/instagram/2.jpg"></div>
+				<div class="instagram-post"><img src="images/instagram/4.jpg"></div>
+				<div class="instagram-post"><img src="images/instagram/3.jpg"></div>
+			</div>
+		</div>
 
-  
-  <svg class="header-shape-2" width="39" height="39" viewBox="0 0 39 39" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <g filter="url(#filter0_d)">
-      <path class="path"
-        d="M24.1587 21.5623C30.02 21.3764 34.6209 16.4742 34.435 10.6128C34.2491 4.75147 29.3468 0.1506 23.4855 0.336498C17.6241 0.522396 13.0233 5.42466 13.2092 11.286C13.3951 17.1474 18.2973 21.7482 24.1587 21.5623Z" />
-      <path
-        d="M5.64626 20.0297C11.1568 19.9267 15.7407 24.2062 16.0362 29.6855L24.631 29.4616L24.1476 10.8081L5.41797 11.296L5.64626 20.0297Z"
-        stroke="#040306" stroke-miterlimit="10" />
-    </g>
-    <defs>
-      <filter id="filter0_d" x="0.905273" y="0" width="37.8663" height="38.1979" filterUnits="userSpaceOnUse"
-        color-interpolation-filters="sRGB">
-        <feFlood flood-opacity="0" result="BackgroundImageFix" />
-        <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" />
-        <feOffset dy="4" />
-        <feGaussianBlur stdDeviation="2" />
-        <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
-        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
-        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
-      </filter>
-    </defs>
-  </svg>
+		<div class="container">
+			<div class="row align-items-center">
+				<div class="col-md-5 text-center text-md-left mb-4">
+					<ul class="list-inline footer-list mb-0">
+						<li class="list-inline-item">
+							<a href="privacy-policy.html">Privacy Policy</a>
+						</li>
+						<li class="list-inline-item">
+							<a href="terms-conditions.html">Terms Conditions</a>
+						</li>
+					</ul>
+				</div>
+				<div class="col-md-2 text-center mb-4">
+					<a href="index.html">
+						<img class="img-fluid" width="100px" src="images/logo.png" alt="Reader | Hugo Personal Blog Template">
+					</a>
+				</div>
+				<div class="col-md-5 text-md-right text-center mb-4">
+					<ul class="list-inline footer-list mb-0">
+						<li class="list-inline-item">
+							<a href="#"><i class="fab fa-facebook"></i></a>
+						</li>
+						<li class="list-inline-item">
+							<a href="#"><i class="fab fa-twitter"></i></a>
+						</li>
+						<li class="list-inline-item">
+							<a href="#"><i class="fab fa-linkedin"></i></a>
+						</li>
+						<li class="list-inline-item">
+							<a href="#"><i class="fab fa-github"></i></a>
+						</li>
+						<li class="list-inline-item">
+							<a href="#"><i class="fab fa-youtube"></i></a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</footer>
 
-  
-  <svg class="header-shape-3" width="39" height="40" viewBox="0 0 39 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M0.965848 20.6397L0.943848 38.3906L18.6947 38.4126L18.7167 20.6617L0.965848 20.6397Z" stroke="#040306"
-      stroke-miterlimit="10" />
-    <path class="path" d="M10.4966 11.1283L10.4746 28.8792L28.2255 28.9012L28.2475 11.1503L10.4966 11.1283Z" />
-    <path d="M20.0078 1.62949L19.9858 19.3804L37.7367 19.4024L37.7587 1.65149L20.0078 1.62949Z" stroke="#040306"
-      stroke-miterlimit="10" />
-  </svg>
+	<!-- Scripts -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="plugins/jQuery/jquery.min.js"></script>
+	<script src="plugins/bootstrap/bootstrap.min.js"></script>
+	<script src="plugins/slick/slick.min.js"></script>
+	<script src="plugins/instafeed/instafeed.min.js"></script>
+	<script src="js/script.js"></script>
 
-  
-  <svg class="header-border" height="240" viewBox="0 0 2202 240" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path
-      d="M1 123.043C67.2858 167.865 259.022 257.325 549.762 188.784C764.181 125.427 967.75 112.601 1200.42 169.707C1347.76 205.869 1901.91 374.562 2201 1"
-      stroke-width="2" />
-  </svg>
-</div>
+	<script>
+		// Add staggered animation to blog cards
+		document.addEventListener('DOMContentLoaded', function() {
+			const cards = document.querySelectorAll('.blog-card');
+			cards.forEach((card, index) => {
+				card.style.animation = `slideUp 0.6s ease-out ${index * 0.1}s both`;
+			});
 
-<section class="section-sm">
- <table class="table table-dark table-striped">
-		<thead>
-			<tr>
-				<th scope="col">#</th>
-				<th scope="col">title</th>
-				<th scope="col">discription</th>
-				<th scope="col">createdAt</th>
-				<th scope="col">Actions</th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:choose>
-				<c:when test="${not empty blogs}">
-					<c:forEach var="blog" items="${blogs}">
-						<tr>
-							<th scope="row">${blog.id}</th>
-							<td>${blog.title}</td>
-							<td>${blog.getDiscription()}</td>
-							<td>${blog.createdAt}</td>
-							<td>
-								<a href="Blog?id=${blog.id}" type="button" class="btn btn-primary">Check out</a>
-								<a href="EditBlog?id=${blog.id}" type="button" class="btn btn-warning">Update</a>
-								<a href="DeleteBloge?id=${blog.id}" type="button" class="btn btn-danger">Delete</a>
-							</td>
-						</tr>
-					</c:forEach>
-				</c:when>
-				<c:otherwise>
-				<p>You haven't posted any blogs yet.</p>
-			</c:otherwise>
-			</c:choose>
+			// Add loading state to action buttons
+			document.querySelectorAll('.btn-action').forEach(button => {
+				button.addEventListener('click', function(e) {
+					if (this.classList.contains('btn-delete')) {
+						// Handle delete confirmation separately
+						return;
+					}
+					
+					this.style.transform = 'scale(0.95)';
+					this.classList.add('loading');
+					
+					setTimeout(() => {
+						this.style.transform = '';
+						this.classList.remove('loading');
+					}, 200);
+				});
+			});
+
+			// Add search functionality (if needed)
+			const searchInput = document.querySelector('#search-query');
+			if (searchInput) {
+				searchInput.addEventListener('input', function() {
+					const searchTerm = this.value.toLowerCase();
+					const blogCards = document.querySelectorAll('.blog-card');
+					
+					blogCards.forEach(card => {
+						const title = card.querySelector('.blog-title').textContent.toLowerCase();
+						const description = card.querySelector('.blog-description').textContent.toLowerCase();
+						
+						if (title.includes(searchTerm) || description.includes(searchTerm)) {
+							card.style.display = 'block';
+							card.style.animation = 'slideUp 0.3s ease-out';
+						} else {
+							card.style.display = 'none';
+						}
+					});
+				});
+			}
+		});
+
+		// Smooth scroll to top function
+		function scrollToTop() {
+			window.scrollTo({
+				top: 0,
+				behavior: 'smooth'
+			});
+		}
+
+		// Add floating action button for create new blog (optional)
+		if (window.innerWidth > 768) {
+			const fab = document.createElement('div');
+			fab.innerHTML = '<i class="fas fa-plus"></i>';
+			fab.className = 'floating-action-btn';
+			fab.onclick = () => window.location.href = 'dashbord';
 			
-		</tbody>
-	</table>
+			fab.style.cssText = `
+				position: fixed;
+				bottom: 30px;
+				right: 30px;
+				width: 60px;
+				height: 60px;
+				background: var(--success-gradient);
+				border-radius: 50%;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				color: white;
+				font-size: 1.5rem;
+				cursor: pointer;
+				box-shadow: 0 4px 20px rgba(79, 172, 254, 0.4);
+				transition: all 0.3s ease;
+				z-index: 1000;
+			`;
+			
+			fab.onmouseenter = () => {
+				fab.style.transform = 'scale(1.1)';
+				fab.style.boxShadow = '0 8px 30px rgba(79, 172, 254, 0.6)';
+			};
+			
+			fab.onmouseleave = () => {
+				fab.style.transform = 'scale(1)';
+				fab.style.boxShadow = '0 4px 20px rgba(79, 172, 254, 0.4)';
+			};
+			
+			document.body.appendChild(fab);
+		}
+	</script>
 </body>
-</html>
-</section>
-
-<footer class="footer">
-  <svg class="footer-border" height="214" viewBox="0 0 2204 214" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M2203 213C2136.58 157.994 1942.77 -33.1996 1633.1 53.0486C1414.13 114.038 1200.92 188.208 967.765 118.127C820.12 73.7483 263.977 -143.754 0.999958 158.899"
-      stroke-width="2" />
-  </svg>
-  
-  <div class="instafeed text-center mb-5">
-      <h2 class="h3 mb-4">INSTAGRAM POST</h2>
-      
-      <div class="instagram-slider">
-        <div class="instagram-post"><img src="images/instagram/1.jpg"></div>
-        <div class="instagram-post"><img src="images/instagram/2.jpg"></div>
-        <div class="instagram-post"><img src="images/instagram/4.jpg"></div>
-        <div class="instagram-post"><img src="images/instagram/3.jpg"></div>
-        <div class="instagram-post"><img src="images/instagram/2.jpg"></div>
-        <div class="instagram-post"><img src="images/instagram/1.jpg"></div>
-        <div class="instagram-post"><img src="images/instagram/3.jpg"></div>
-        <div class="instagram-post"><img src="images/instagram/4.jpg"></div>
-        <div class="instagram-post"><img src="images/instagram/2.jpg"></div>
-        <div class="instagram-post"><img src="images/instagram/4.jpg"></div>
-      </div>
-  </div>
-  
-  <div class="container">
-      <div class="row align-items-center">
-      <div class="col-md-5 text-center text-md-left mb-4">
-          <ul class="list-inline footer-list mb-0">
-            <li class="list-inline-item"><a href="privacy-policy.html">Privacy Policy</a></li>
-            <li class="list-inline-item"><a href="terms-conditions.html">Terms Conditions</a></li>
-          </ul>
-      </div>
-      <div class="col-md-2 text-center mb-4">
-          <a href="index.html"><img class="img-fluid" width="100px" src="images/logo.png" alt="Reader | Hugo Personal Blog Template"></a>
-      </div>
-      <div class="col-md-5 text-md-right text-center mb-4">
-          <ul class="list-inline footer-list mb-0">
-          
-          <li class="list-inline-item"><a href="#"><i class="ti-facebook"></i></a></li>
-          
-          <li class="list-inline-item"><a href="#"><i class="ti-twitter-alt"></i></a></li>
-          
-          <li class="list-inline-item"><a href="#"><i class="ti-linkedin"></i></a></li>
-          
-          <li class="list-inline-item"><a href="#"><i class="ti-github"></i></a></li>
-          
-          <li class="list-inline-item"><a href="#"><i class="ti-youtube"></i></a></li>
-          
-          </ul>
-      </div>
-      <div class="col-12">
-          <div class="border-bottom border-default"></div>
-      </div>
-      </div>
-  </div>
-  </footer>
-
-
-  <!-- JS Plugins -->
-  <script src="plugins/jQuery/jquery.min.js"></script>
-
-  <script src="plugins/bootstrap/bootstrap.min.js"></script>
-
-  <script src="plugins/slick/slick.min.js"></script>
-
-  <script src="plugins/instafeed/instafeed.min.js"></script>
-
-
-  <!-- Main Script -->
-  <script src="js/script.js"></script></body>
 </html>

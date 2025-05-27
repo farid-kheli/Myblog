@@ -47,6 +47,14 @@
 		<url-pattern>/logout</url-pattern>
 	</servlet-mapping>
 	<servlet>
+		<servlet-name>addWalletAddress</servlet-name>
+		<servlet-class>servlet.ADDaddress</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>addWalletAddress</servlet-name>
+		<url-pattern>/addWalletAddress</url-pattern>
+	</servlet-mapping>
+	<servlet>
 		<servlet-name>profiel</servlet-name>
 		<servlet-class>servlet.profil</servlet-class>
 	</servlet>
@@ -207,6 +215,15 @@
 	<servlet-mapping>
 		<servlet-name>setting</servlet-name>
 		<url-pattern>/setting</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>donate</servlet-name>
+		<servlet-class>servlet.donate</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>donate</servlet-name>
+		<url-pattern>/donate</url-pattern>
 	</servlet-mapping>
 
 	<servlet>

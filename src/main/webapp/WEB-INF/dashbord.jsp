@@ -1,300 +1,659 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
+<html lang="en-us">
+<head>
+<meta charset="utf-8">
+<title>Create Blog - Reader Platform</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="Create and publish your blog posts">
+<meta name="author" content="Themefisher">
 
-<html lang="en-us"><head>
-  <meta charset="utf-8">
-  <title>Reader | Hugo Personal Blog Template</title>
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-  <!-- mobile responsive meta -->
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="This is meta description">
-  <meta name="author" content="Themefisher">
-  <meta name="generator" content="Hugo 0.74.3" />
+<!-- TinyMCE Editor -->
+<script src="https://cdn.tiny.cloud/1/da91lze1q4ce30bdj8na78ygotv4sushpwqxdm0y39ccoqnz/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
 
-  <!-- plugins -->
-  
-  <link rel="stylesheet" href="plugins/bootstrap/bootstrap.min.css">
-  <link rel="stylesheet" href="plugins/themify-icons/themify-icons.css">
-  <link rel="stylesheet" href="plugins/slick/slick.css">
+<!-- Original stylesheets -->
+<link rel="stylesheet" href="plugins/bootstrap/bootstrap.min.css">
+<link rel="stylesheet" href="plugins/themify-icons/themify-icons.css">
+<link rel="stylesheet" href="plugins/slick/slick.css">
+<link rel="stylesheet" href="css/style.css" media="screen">
 
-  <!-- Main Stylesheet -->
-  <link rel="stylesheet" href="css/style.css" media="screen">
+<!--Favicon-->
+<link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
+<link rel="icon" href="images/favicon.png" type="image/x-icon">
 
-  <!--Favicon-->
-  <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
-  <link rel="icon" href="images/favicon.png" type="image/x-icon">
+<style>
+	:root {
+		--primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+		--secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+		--success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+		--warning-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+		--danger-gradient: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+		--dark-bg: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+		--glass-bg: rgba(255, 255, 255, 0.1);
+		--glass-border: rgba(255, 255, 255, 0.2);
+	}
 
-  <meta property="og:title" content="Reader | Hugo Personal Blog Template" />
-  <meta property="og:description" content="This is meta description" />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="" />
-  <meta property="og:updated_time" content="2020-03-15T15:40:24+06:00" />
-  <script
-	src="https://cdn.tiny.cloud/1/da91lze1q4ce30bdj8na78ygotv4sushpwqxdm0y39ccoqnz/tinymce/7/tinymce.min.js"
-	referrerpolicy="origin"></script>
-  <script>
-	tinymce
-			.init({
-				selector : '#content',
-				plugins : 'lists link image table',
-				toolbar : 'undo redo | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+	body {
+		background: var(--dark-bg);
+		min-height: 100vh;
+		font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+		overflow-x: hidden;
+	}
+
+	/* Animated background particles */
+	body::before {
+		content: '';
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-image: 
+			radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+			radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+			radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.3) 0%, transparent 50%);
+		animation: float 20s ease-in-out infinite;
+		z-index: -1;
+	}
+
+	@keyframes float {
+		0%, 100% { transform: translateY(0px) rotate(0deg); }
+		33% { transform: translateY(-30px) rotate(120deg); }
+		66% { transform: translateY(15px) rotate(240deg); }
+	}
+
+	/* Header section */
+	.header {
+		position: relative;
+		padding: 150px 0 100px;
+		overflow: hidden;
+		background: transparent;
+	}
+
+	.header h1 {
+		color: white;
+		font-size: 3rem;
+		font-weight: 300;
+		text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+		margin-bottom: 1.5rem;
+		animation: slideUp 1s ease-out;
+	}
+
+	.header h1 span {
+		background: var(--warning-gradient);
+		-webkit-background-clip: text;
+		background-clip: text;
+		-webkit-text-fill-color: transparent;
+		font-weight: 600;
+	}
+
+	@keyframes slideUp {
+		from {
+			opacity: 0;
+			transform: translateY(50px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	.list-inline-item a {
+		color: rgba(255, 255, 255, 0.8) !important;
+		text-decoration: none;
+		transition: color 0.3s ease;
+	}
+
+	.list-inline-item a:hover {
+		color: #ffd700 !important;
+	}
+
+	.text-primary {
+		color: #ffd700 !important;
+	}
+
+	/* Main content container */
+	.content-container {
+		background: var(--glass-bg);
+		backdrop-filter: blur(20px);
+		border: 1px solid var(--glass-border);
+		border-radius: 20px;
+		box-shadow: 
+			0 8px 32px 0 rgba(31, 38, 135, 0.37),
+			inset 0 1px 0 rgba(255, 255, 255, 0.2);
+		animation: slideUp 0.6s ease-out 0.3s both;
+		overflow: hidden;
+		margin-bottom: 50px;
+	}
+
+	/* Content section styling */
+	.content {
+		color: white;
+		padding: 30px;
+		border-bottom: 1px solid var(--glass-border);
+		background: rgba(255, 255, 255, 0.05);
+	}
+
+	.content h2 {
+		color: white;
+		font-weight: 600;
+		margin-bottom: 20px;
+		position: relative;
+		padding-bottom: 10px;
+	}
+
+	.content h2::after {
+		content: '';
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 60px;
+		height: 3px;
+		background: var(--warning-gradient);
+		border-radius: 2px;
+	}
+
+	.content p {
+		color: rgba(255, 255, 255, 0.8);
+		line-height: 1.6;
+	}
+
+	/* Form styling */
+	.blog-form {
+		padding: 40px;
+	}
+
+	.form-group {
+		margin-bottom: 25px;
+	}
+
+	.form-group label {
+		color: white;
+		font-weight: 500;
+		margin-bottom: 8px;
+		display: block;
+		font-size: 0.95em;
+	}
+
+	.form-control {
+		background: rgba(255, 255, 255, 0.1) !important;
+		border: 2px solid rgba(255, 255, 255, 0.2) !important;
+		color: white !important;
+		border-radius: 12px !important;
+		padding: 12px 16px !important;
+		transition: all 0.3s ease;
+		font-size: 1rem;
+	}
+
+	.form-control:focus {
+		background: rgba(255, 255, 255, 0.15) !important;
+		border-color: #667eea !important;
+		box-shadow: 0 0 20px rgba(102, 126, 234, 0.3) !important;
+		transform: translateY(-2px);
+		outline: none;
+	}
+
+	.form-control::placeholder {
+		color: rgba(255, 255, 255, 0.6) !important;
+	}
+
+	/* Select dropdown styling */
+	.form-select,
+	select.form-control {
+		background: rgba(255, 255, 255, 0.1) !important;
+		border: 2px solid rgba(255, 255, 255, 0.2) !important;
+		color: white !important;
+		border-radius: 12px !important;
+		padding: 12px 16px !important;
+		cursor: pointer;
+	}
+
+	.form-select option,
+	select.form-control option {
+		background: #1e3c72;
+		color: white;
+		padding: 10px;
+	}
+
+	/* File upload styling */
+	.input-group {
+		border-radius: 12px;
+		overflow: hidden;
+		box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+	}
+
+	.input-group-text {
+		background: var(--primary-gradient) !important;
+		color: white !important;
+		border: none !important;
+		font-weight: 500;
+		padding: 12px 20px;
+	}
+
+	.input-group .form-control {
+		border-left: none !important;
+		border-radius: 0 12px 12px 0 !important;
+	}
+
+	/* TinyMCE container styling */
+	.editor-container {
+		margin: 25px 0;
+	}
+
+	.editor-container h3 {
+		color: white;
+		font-weight: 600;
+		margin-bottom: 15px;
+		font-size: 1.2em;
+	}
+
+	/* Custom button styling */
+	.btn-custom {
+		background: var(--success-gradient);
+		border: none;
+		color: white;
+		font-weight: 600;
+		padding: 15px 40px;
+		border-radius: 25px;
+		transition: all 0.3s ease;
+		box-shadow: 0 4px 15px rgba(79, 172, 254, 0.4);
+		font-size: 1.1em;
+		text-transform: uppercase;
+		letter-spacing: 0.5px;
+	}
+
+	.btn-custom:hover {
+		transform: translateY(-3px);
+		box-shadow: 0 8px 25px rgba(79, 172, 254, 0.6);
+		color: white;
+	}
+
+	.btn-custom i {
+		margin-right: 8px;
+	}
+
+	/* Footer styling */
+	.footer {
+		background: rgba(30, 60, 114, 0.9);
+		backdrop-filter: blur(20px);
+		border-top: 1px solid var(--glass-border);
+		color: white;
+		margin-top: 50px;
+	}
+
+	.instafeed h2 {
+		color: white;
+		margin-bottom: 30px;
+	}
+
+	.instagram-post img {
+		border-radius: 15px;
+		transition: transform 0.3s ease;
+		border: 2px solid var(--glass-border);
+	}
+
+	.instagram-post:hover img {
+		transform: scale(1.05);
+	}
+
+	.footer-list a {
+		color: rgba(255, 255, 255, 0.7);
+		text-decoration: none;
+		transition: color 0.3s ease;
+	}
+
+	.footer-list a:hover {
+		color: #ffd700;
+	}
+
+	/* Responsive design */
+	@media (max-width: 768px) {
+		.header h1 {
+			font-size: 2rem;
+		}
+		
+		.content,
+		.blog-form {
+			padding: 20px;
+		}
+		
+		.btn-custom {
+			padding: 12px 30px;
+			font-size: 1rem;
+		}
+	}
+
+	/* Loading animation for form submission */
+	.btn-custom.loading {
+		pointer-events: none;
+		opacity: 0.7;
+	}
+
+	.btn-custom.loading::after {
+		content: '';
+		position: absolute;
+		width: 16px;
+		height: 16px;
+		margin: auto;
+		border: 2px solid transparent;
+		border-top-color: #ffffff;
+		border-radius: 50%;
+		animation: spin 1s linear infinite;
+	}
+
+	@keyframes spin {
+		0% { transform: rotate(0deg); }
+		100% { transform: rotate(360deg); }
+	}
+
+	/* TinyMCE dark theme override */
+	.tox .tox-editor-header {
+		background: rgba(255, 255, 255, 0.1) !important;
+		border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
+	}
+
+	.tox .tox-toolbar__group {
+		border-color: rgba(255, 255, 255, 0.1) !important;
+	}
+</style>
+
+<script>
+	// Initialize TinyMCE with dark theme
+	tinymce.init({
+		selector: '#content',
+		height: 400,
+		plugins: 'lists link image table code fullscreen preview',
+		toolbar: 'undo redo | formatselect | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image table | code fullscreen preview',
+		skin: 'oxide-dark',
+		content_css: 'dark',
+		menubar: false,
+		branding: false,
+		resize: true,
+		statusbar: true,
+		placeholder: 'Start writing your amazing blog post here...',
+		setup: function (editor) {
+			editor.on('init', function () {
+				// Custom styling for the editor
+				editor.getContainer().style.borderRadius = '12px';
+				editor.getContainer().style.overflow = 'hidden';
+				editor.getContainer().style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.1)';
 			});
+		}
+	});
 </script>
 </head>
 <body>
-  <!-- navigation -->
-<header class="navigation fixed-top">
-  <div class="container">
-   <nav class="navbar navbar-expand-lg navbar-white">
-				<a class="navbar-brand order-1" href="index.html"> <img
-					class="img-fluid" width="100px" src="images/logo.png"
-					alt="Reader | Hugo Personal Blog Template">
-				</a>
-				<div class="collapse navbar-collapse text-center order-lg-2 order-3"
-					id="navigation">
-					<ul class="navbar-nav mx-auto">
-						<li class="nav-item dropdown"><a class="nav-link" href=home
-							aria-haspopup="true" aria-expanded="false"> homepage </a></li>
+	<%@ include file="P_Nav.jsp" %>
 
-
-						<li class="nav-item"><a class="nav-link" href="dashbord">Write
-								Now</a></li>
-
-
-
-						<li class="nav-item"><a class="nav-link" href="MyBloges">My
-								Bloges</a></li>
-						<li class="nav-item dropdown"><a class="nav-link" href="#"
-							role="button" data-toggle="dropdown" aria-haspopup="true"
-							aria-expanded="false"> profiel <i class="ti-angle-down ml-1"></i>
-						</a>
-							<div class="dropdown-menu">
-
-								<a class="dropdown-item" href="profiel">profiel</a> <a
-									class="dropdown-item" href="MyLikes">My Liked Posts</a> <a
-									class="dropdown-item" href="MySaves">My Saved Posts</a> <a
-									class="dropdown-item" href="setting">setting</a> <a
-									class="dropdown-item" href="logout">logout</a>
-							</div></li>
+	<!-- Header Section -->
+	<div class="header text-center">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-9 mx-auto">
+					<h1 class="mb-4">Create a <span>Blog Post</span></h1>
+					<ul class="list-inline">
+						<li class="list-inline-item">
+							<a href="MyBloges"><i class="fas fa-blog me-2"></i>My Blogs &nbsp; /</a>
+						</li>
+						<li class="list-inline-item text-primary">
+							<i class="fas fa-plus me-2"></i>Create
+						</li>
 					</ul>
 				</div>
-
-				<div class="order-2 order-lg-3 d-flex align-items-center">
-					<select class="m-2 border-0 bg-transparent" id="select-language">
-						<option id="en" value="" selected>En</option>
-						<option id="fr" value="">Fr</option>
-					</select>
-
-					<form action="search" method="post" class="search-bar">
-						<input id="search-query" name="search" type="search"
-							placeholder="Type &amp; Hit Enter...">
-					</form>
-
-					<button class="navbar-toggler border-0 order-1" type="button"
-						data-toggle="collapse" data-target="#navigation">
-						<i class="ti-menu"></i>
-					</button>
-				</div>
-
-			</nav>
-  </div>
-</header>
-<!-- /navigation -->
-<div class="header text-center">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-9 mx-auto">
-        <h1 class="mb-4">Create a Blog Post</h1>
-        <ul class="list-inline">
-          <li class="list-inline-item"><a class="text-default" href="MyBloges">My Blogs
-              &nbsp; &nbsp; /</a></li>
-          <li class="list-inline-item text-primary">Create</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  
-  <svg class="header-shape-1" width="39" height="40" viewBox="0 0 39 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M0.965848 20.6397L0.943848 38.3906L18.6947 38.4126L18.7167 20.6617L0.965848 20.6397Z" stroke="#040306"
-      stroke-miterlimit="10" />
-    <path class="path" d="M10.4966 11.1283L10.4746 28.8792L28.2255 28.9012L28.2475 11.1503L10.4966 11.1283Z" />
-    <path d="M20.0078 1.62949L19.9858 19.3804L37.7367 19.4024L37.7587 1.65149L20.0078 1.62949Z" stroke="#040306"
-      stroke-miterlimit="10" />
-  </svg>
-
-  
-  <svg class="header-shape-2" width="39" height="39" viewBox="0 0 39 39" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <g filter="url(#filter0_d)">
-      <path class="path"
-        d="M24.1587 21.5623C30.02 21.3764 34.6209 16.4742 34.435 10.6128C34.2491 4.75147 29.3468 0.1506 23.4855 0.336498C17.6241 0.522396 13.0233 5.42466 13.2092 11.286C13.3951 17.1474 18.2973 21.7482 24.1587 21.5623Z" />
-      <path
-        d="M5.64626 20.0297C11.1568 19.9267 15.7407 24.2062 16.0362 29.6855L24.631 29.4616L24.1476 10.8081L5.41797 11.296L5.64626 20.0297Z"
-        stroke="#040306" stroke-miterlimit="10" />
-    </g>
-    <defs>
-      <filter id="filter0_d" x="0.905273" y="0" width="37.8663" height="38.1979" filterUnits="userSpaceOnUse"
-        color-interpolation-filters="sRGB">
-        <feFlood flood-opacity="0" result="BackgroundImageFix" />
-        <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" />
-        <feOffset dy="4" />
-        <feGaussianBlur stdDeviation="2" />
-        <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
-        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
-        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
-      </filter>
-    </defs>
-  </svg>
-
-  
-  <svg class="header-shape-3" width="39" height="40" viewBox="0 0 39 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M0.965848 20.6397L0.943848 38.3906L18.6947 38.4126L18.7167 20.6617L0.965848 20.6397Z" stroke="#040306"
-      stroke-miterlimit="10" />
-    <path class="path" d="M10.4966 11.1283L10.4746 28.8792L28.2255 28.9012L28.2475 11.1503L10.4966 11.1283Z" />
-    <path d="M20.0078 1.62949L19.9858 19.3804L37.7367 19.4024L37.7587 1.65149L20.0078 1.62949Z" stroke="#040306"
-      stroke-miterlimit="10" />
-  </svg>
-
-  
-  <svg class="header-border" height="240" viewBox="0 0 2202 240" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path
-      d="M1 123.043C67.2858 167.865 259.022 257.325 549.762 188.784C764.181 125.427 967.75 112.601 1200.42 169.707C1347.76 205.869 1901.91 374.562 2201 1"
-      stroke-width="2" />
-  </svg>
-</div>
-
-<section class="section-sm">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8 mx-auto">
-        
-        <div class="content mb-5">
-          <h2 id="we-would-love-to-hear-from-you">We would Love To Hear From You&hellip;.</h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Velit massa vitae felis augue. In venenatis scelerisque accumsan egestas mattis. Massa feugiat in sem pellentesque.</p>
-        </div>
-        
-        <form method="POST" action="saveBlog" enctype="multipart/form-data">
-          <div class="form-group">
-            <label for="title">Titel</label>
-            <input type="text" name="title" id="title" class="form-control" placeholder="John Doe" required>
-          </div>
-          <div class="form-group">
-            <label for="discription">discription</label>
-            <input type="text" name="discription" id="discription" class="form-control" placeholder="enter a discription for your blog" required>
-          </div>
-           <div class="form-group">
-            <label for="discription">discription</label>
-         			<select class="form-control p-2 bg-secendary mb-4 w-100" name="categry" aria-label="Default select example">
-				<option selected>Open this select menu</option>
-				<c:choose>
-					<c:when test="${not empty categrys}">
-						<c:forEach var="categry" items="${categrys}">
-							<option  value="${categry.getId()}"> ${categry.getCategory()}</option>
-							<option class="dropdown-item"  value="${categry.getId()}"> ${categry.getCategory()}</option>
-						</c:forEach>
-					</c:when>
-					<c:otherwise>
-						<p>There is no Categorys yet.</p>
-					</c:otherwise>
-				</c:choose>
-			</select>
-		</div>
-		<div class="form-floating text-black mt-3 mb-3">
-			<input type="text" name="discription" class="form-control" 
-				> <label >discription</label>
-		</div>
-		<div class="input-group mb-3">
-			<label class="input-group-text" for="inputGroupFile01">Upload</label>
-			<input type="file" name="B_Img" class="form-control" id="inputGroupFile01">
-		</div>
-		<div>
 			</div>
-          <div class="input-group mb-3">
-			<label class="input-group-text" for="inputGroupFile01">Upload</label>
-			<input type="file" name="B_Img" class="form-control" id="inputGroupFile01">
 		</div>
-          <div>
-			<h3>Content:</h3>
-			<textarea id="content" name="content"></textarea>
-			<br> <br>
+	</div>
+
+	<!-- Main Content Section -->
+	<section class="section-sm">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-10 mx-auto">
+					<div class="content-container">
+						<!-- Welcome Content -->
+						<div class="content">
+							<h2><i class="fas fa-pen-fancy me-3"></i>Share Your Story With The World</h2>
+							<p>Create engaging blog posts that captivate your audience. Use our powerful editor to format your content, add images, and bring your ideas to life. Your voice matters, and we're here to help you share it with the world.</p>
+						</div>
+						
+						<!-- Blog Creation Form -->
+						<div class="blog-form">
+							<form method="POST" action="saveBlog" enctype="multipart/form-data" id="blogForm">
+								<div class="row">
+									<div class="col-md-8">
+										<div class="form-group">
+											<label for="title"><i class="fas fa-heading me-2"></i>Blog Title</label>
+											<input type="text" name="title" id="title" class="form-control" 
+												placeholder="Enter an engaging title for your blog post" required>
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<label for="category"><i class="fas fa-tags me-2"></i>Category</label>
+											<select class="form-control" name="categry" id="category" required>
+												<option value="" disabled selected>Select a category</option>
+												<c:choose>
+													<c:when test="${not empty categrys}">
+														<c:forEach var="categry" items="${categrys}">
+															<option value="${categry.getId()}">${categry.getCategory()}</option>
+														</c:forEach>
+													</c:when>
+													<c:otherwise>
+														<option disabled>No categories available</option>
+													</c:otherwise>
+												</c:choose>
+											</select>
+										</div>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label for="discription"><i class="fas fa-align-left me-2"></i>Short Description</label>
+									<input type="text" name="discription" id="discription" class="form-control" 
+										placeholder="Write a brief description that will appear in blog previews" required>
+								</div>
+
+								<div class="form-group">
+									<label for="inputGroupFile01"><i class="fas fa-image me-2"></i>Featured Image</label>
+									<div class="input-group">
+										<span class="input-group-text">
+											<i class="fas fa-upload me-2"></i>Choose File
+										</span>
+										<input type="file" name="B_Img" class="form-control" id="inputGroupFile01" 
+											accept="image/*" required>
+									</div>
+									<small class="text-white-50 mt-2">
+										<i class="fas fa-info-circle me-1"></i>
+										Recommended size: 1200x600px for best results
+									</small>
+								</div>
+
+								<div class="editor-container">
+									<label for="content"><i class="fas fa-edit me-2"></i>Blog Content</label>
+									<textarea id="content" name="content" placeholder="Start writing your amazing blog post here..."></textarea>
+								</div>
+
+								<div class="text-center mt-4">
+									<button type="submit" class="btn btn-custom">
+										<i class="fas fa-save"></i>Publish Blog Post
+									</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
-		<button type="submit" class="btn btn-outline-primary">Save
-			Blog</button>
-	</form>
-         
-      </div>
-    </div>
-  </div>
-</section>
+	</section>
 
-<footer class="footer">
-  <svg class="footer-border" height="214" viewBox="0 0 2204 214" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M2203 213C2136.58 157.994 1942.77 -33.1996 1633.1 53.0486C1414.13 114.038 1200.92 188.208 967.765 118.127C820.12 73.7483 263.977 -143.754 0.999958 158.899"
-      stroke-width="2" />
-  </svg>
-  
-  <div class="instafeed text-center mb-5">
-      <h2 class="h3 mb-4">INSTAGRAM POST</h2>
-      
-      <div class="instagram-slider">
-        <div class="instagram-post"><img src="images/instagram/1.jpg"></div>
-        <div class="instagram-post"><img src="images/instagram/2.jpg"></div>
-        <div class="instagram-post"><img src="images/instagram/4.jpg"></div>
-        <div class="instagram-post"><img src="images/instagram/3.jpg"></div>
-        <div class="instagram-post"><img src="images/instagram/2.jpg"></div>
-        <div class="instagram-post"><img src="images/instagram/1.jpg"></div>
-        <div class="instagram-post"><img src="images/instagram/3.jpg"></div>
-        <div class="instagram-post"><img src="images/instagram/4.jpg"></div>
-        <div class="instagram-post"><img src="images/instagram/2.jpg"></div>
-        <div class="instagram-post"><img src="images/instagram/4.jpg"></div>
-      </div>
-  </div>
-  
-  <div class="container">
-      <div class="row align-items-center">
-      <div class="col-md-5 text-center text-md-left mb-4">
-          <ul class="list-inline footer-list mb-0">
-            <li class="list-inline-item"><a href="privacy-policy.html">Privacy Policy</a></li>
-            <li class="list-inline-item"><a href="terms-conditions.html">Terms Conditions</a></li>
-          </ul>
-      </div>
-      <div class="col-md-2 text-center mb-4">
-          <a href="index.html"><img class="img-fluid" width="100px" src="images/logo.png" alt="Reader | Hugo Personal Blog Template"></a>
-      </div>
-      <div class="col-md-5 text-md-right text-center mb-4">
-          <ul class="list-inline footer-list mb-0">
-          
-          <li class="list-inline-item"><a href="#"><i class="ti-facebook"></i></a></li>
-          
-          <li class="list-inline-item"><a href="#"><i class="ti-twitter-alt"></i></a></li>
-          
-          <li class="list-inline-item"><a href="#"><i class="ti-linkedin"></i></a></li>
-          
-          <li class="list-inline-item"><a href="#"><i class="ti-github"></i></a></li>
-          
-          <li class="list-inline-item"><a href="#"><i class="ti-youtube"></i></a></li>
-          
-          </ul>
-      </div>
-      <div class="col-12">
-          <div class="border-bottom border-default"></div>
-      </div>
-      </div>
-  </div>
-  </footer>
+	<!-- Footer -->
+	<footer class="footer">
+		<div class="instafeed text-center mb-5">
+			<h2 class="h3 mb-4">
+				<i class="fab fa-instagram me-2"></i>INSTAGRAM POSTS
+			</h2>
+			<div class="instagram-slider">
+				<div class="instagram-post"><img src="images/instagram/1.jpg"></div>
+				<div class="instagram-post"><img src="images/instagram/2.jpg"></div>
+				<div class="instagram-post"><img src="images/instagram/4.jpg"></div>
+				<div class="instagram-post"><img src="images/instagram/3.jpg"></div>
+				<div class="instagram-post"><img src="images/instagram/2.jpg"></div>
+				<div class="instagram-post"><img src="images/instagram/1.jpg"></div>
+				<div class="instagram-post"><img src="images/instagram/3.jpg"></div>
+				<div class="instagram-post"><img src="images/instagram/4.jpg"></div>
+				<div class="instagram-post"><img src="images/instagram/2.jpg"></div>
+				<div class="instagram-post"><img src="images/instagram/4.jpg"></div>
+			</div>
+		</div>
 
+		<div class="container">
+			<div class="row align-items-center">
+				<div class="col-md-5 text-center text-md-left mb-4">
+					<ul class="list-inline footer-list mb-0">
+						<li class="list-inline-item">
+							<a href="privacy-policy.html">Privacy Policy</a>
+						</li>
+						<li class="list-inline-item">
+							<a href="terms-conditions.html">Terms Conditions</a>
+						</li>
+					</ul>
+				</div>
+				<div class="col-md-2 text-center mb-4">
+					<a href="index.html">
+						<img class="img-fluid" width="100px" src="images/logo.png" alt="Reader | Hugo Personal Blog Template">
+					</a>
+				</div>
+				<div class="col-md-5 text-md-right text-center mb-4">
+					<ul class="list-inline footer-list mb-0">
+						<li class="list-inline-item">
+							<a href="#"><i class="fab fa-facebook"></i></a>
+						</li>
+						<li class="list-inline-item">
+							<a href="#"><i class="fab fa-twitter"></i></a>
+						</li>
+						<li class="list-inline-item">
+							<a href="#"><i class="fab fa-linkedin"></i></a>
+						</li>
+						<li class="list-inline-item">
+							<a href="#"><i class="fab fa-github"></i></a>
+						</li>
+						<li class="list-inline-item">
+							<a href="#"><i class="fab fa-youtube"></i></a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</footer>
 
-  <!-- JS Plugins -->
-  <script src="plugins/jQuery/jquery.min.js"></script>
+	<!-- Scripts -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="plugins/jQuery/jquery.min.js"></script>
+	<script src="plugins/bootstrap/bootstrap.min.js"></script>
+	<script src="plugins/slick/slick.min.js"></script>
+	<script src="plugins/instafeed/instafeed.min.js"></script>
+	<script src="js/script.js"></script>
 
-  <script src="plugins/bootstrap/bootstrap.min.js"></script>
+	<script>
+		// Form validation and submission
+		document.getElementById('blogForm').addEventListener('submit', function(e) {
+			const button = this.querySelector('button[type="submit"]');
+			const originalText = button.innerHTML;
+			
+			// Add loading state
+			button.classList.add('loading');
+			button.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Publishing...';
+			button.disabled = true;
+			
+			// Validate TinyMCE content
+			const content = tinymce.get('content').getContent();
+			if (!content.trim()) {
+				e.preventDefault();
+				alert('Please add some content to your blog post.');
+				button.classList.remove('loading');
+				button.innerHTML = originalText;
+				button.disabled = false;
+				return;
+			}
+			
+			// Show success message after a delay (for demo purposes)
+			setTimeout(() => {
+				// Form will actually submit, this is just for UI feedback
+			}, 1000);
+		});
 
-  <script src="plugins/slick/slick.min.js"></script>
+		// File upload preview
+		document.getElementById('inputGroupFile01').addEventListener('change', function(e) {
+			const file = e.target.files[0];
+			if (file) {
+				const fileSize = (file.size / 1024 / 1024).toFixed(2);
+				console.log(`Selected file: ${file.name} (${fileSize} MB)`);
+				
+				// Show file info
+				const fileInfo = document.createElement('small');
+				fileInfo.className = 'text-success mt-1 d-block';
+				fileInfo.innerHTML = `<i class="fas fa-check-circle me-1"></i>Selected: ${file.name}`;
+				
+				// Remove any existing file info
+				const existingInfo = this.parentNode.parentNode.querySelector('.file-info');
+				if (existingInfo) existingInfo.remove();
+				
+				fileInfo.className += ' file-info';
+				this.parentNode.parentNode.appendChild(fileInfo);
+			}
+		});
 
-  <script src="plugins/instafeed/instafeed.min.js"></script>
+		// Auto-save functionality (optional)
+		let autoSaveInterval;
+		function startAutoSave() {
+			autoSaveInterval = setInterval(() => {
+				const title = document.getElementById('title').value;
+				const description = document.getElementById('discription').value;
+				const content = tinymce.get('content').getContent();
+				
+				if (title || description || content) {
+					// Save to localStorage as draft
+					const draft = {
+						title,
+						description,
+						content,
+						timestamp: new Date().toISOString()
+					};
+					localStorage.setItem('blogDraft', JSON.stringify(draft));
+					console.log('Draft saved automatically');
+				}
+			}, 30000); // Save every 30 seconds
+		}
 
+		// Load draft on page load
+		window.addEventListener('load', () => {
+			const draft = localStorage.getItem('blogDraft');
+			if (draft) {
+				const parsedDraft = JSON.parse(draft);
+				const confirmRestore = confirm('A draft was found. Would you like to restore it?');
+				
+				if (confirmRestore) {
+					document.getElementById('title').value = parsedDraft.title || '';
+					document.getElementById('discription').value = parsedDraft.description || '';
+					
+					// Wait for TinyMCE to initialize
+					tinymce.get('content').setContent(parsedDraft.content || '');
+				}
+			}
+			
+			// Start auto-save
+			startAutoSave();
+		});
 
-  <!-- Main Script -->
-  <script src="js/script.js"></script></body>
+		// Clear draft on successful submission
+		document.getElementById('blogForm').addEventListener('submit', () => {
+			localStorage.removeItem('blogDraft');
+		});
+	</script>
+</body>
 </html>

@@ -1,5 +1,7 @@
 package beans;
 import java.sql.Date;
+
+import DAO.UserDAO;
 public class Comment {
 	private int id;
     private int userID;
@@ -23,6 +25,8 @@ public class Comment {
     public Date getTime() { return time; }
     public int getuserID() { return userID; }
     public String getcomment() { return comment; }
+    public String getUserImg() throws Exception { return UserDAO.getUserById(userID).getImg(); }
     public int getblogID() { return blogID; }
+    
     
 }

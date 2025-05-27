@@ -11,8 +11,12 @@ import jakarta.servlet.http.Part;
 import java.util.Random;
 import java.util.stream.Collectors;
 
-import DAO.CategoryDAO;
+import org.web3j.crypto.Credentials;
+import org.web3j.protocol.Web3j;
+import org.web3j.tx.gas.DefaultGasProvider;
 
+import DAO.CategoryDAO;
+import org.web3j.protocol.http.HttpService; 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -25,6 +29,7 @@ import beans.Blog;
 import beans.Categry;
 import beans.GetUserID;
 import beans.User;
+import blockchain.SmartContreact;
 
 import java.sql.DriverManager;
 import java.io.BufferedReader;
@@ -40,9 +45,30 @@ import java.nio.file.StandardCopyOption;
 	    maxRequestSize = 1024 * 1024 * 50 // Max request size: 50MB
 	)
 
-public class Dashbord extends HttpServlet {
+public class Dashbord<BlogService> extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+	private Web3j web3j;
+    private Credentials credentials;
+    private SmartContreact contract;
+
+    @Override
+    public void init() throws ServletException {
+        try {
+            web3j = Web3j.build(new HttpService("http://127.0.0.1:7545"));
+            System.out.println("hellloooooooooooooooo"+web3j);
+            credentials = Credentials.create("0xd4e4eba380dfbe39a9e54d0ad946ee22ebfbcf1ca66ca00cc9507c8b73713302");
+
+            String contractAddress = "0xe03587F38636d84FC262Cae3F2F831df477f0571";  
+            contract = SmartContreact.load(
+                contractAddress,
+                web3j,
+                credentials,
+                new DefaultGasProvider()
+            );
+        } catch (Exception e) {
+            e.printStackTrace(); 
+        }
+    }
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
@@ -89,7 +115,8 @@ public class Dashbord extends HttpServlet {
 	            PreparedStatement stmt = conn.prepareStatement("INSERT INTO blogs (title, content, author_id, category_id,discription) VALUES (?, ?, ?, ?,?)"
 	            		,Statement.RETURN_GENERATED_KEYS
 	            		);
-	            
+
+	        	contract.createBlog(title, content).send();
 	            stmt.setString(1, title);
 	            stmt.setString(2, content);
 	            stmt.setInt(3, userId);
