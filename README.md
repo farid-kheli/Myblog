@@ -79,6 +79,12 @@ MyBlog is a secure blogging platform built using **Java EE**, **JSP**, and **Ser
 - [MyBlogAPI](https://github.com/farid-kheli/MyBlogAPI) service is a backed that searve the website blogs
 - [SmartContract](#) the SmartContract used for Tiping ather withe eth  
 ---
+## 📷 overview
+![Screenshot_2025-05-23_17_30_30](https://github.com/user-attachments/assets/f7ebb596-bc36-404c-a696-12c563ba9e11)
+![Screenshot_2025-07-08_16-26-10](https://github.com/user-attachments/assets/005d2355-eae4-4994-8a85-5745a85e1fbe)
+![Screenshot_2025-07-08_16-26-22](https://github.com/user-attachments/assets/51bd1cfe-b459-4fb2-81e2-284f7816ada1)
+![Screenshot_2025-07-08_16-27-59](https://github.com/user-attachments/assets/30775c97-8602-4f0a-ae70-54cc93c98c74)
+![Screenshot_2025-07-08_16-28-52](https://github.com/user-attachments/assets/be9e83b6-734b-4c5c-a155-52fa6ec168a2)
 
 ## 📜 License
 
